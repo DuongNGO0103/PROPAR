@@ -57,23 +57,12 @@ class ExpertController extends AbstractController
         $form = $this->createForm(RegistrationOperationType::class, $commandes);
         $form->handleRequest($request);
 
-        // $test = $repository->findByExampleField();
-
-
-        $sql = "SELECT sum(prix) 
-        FROM commande c
-        inner join operation o on c.operation_id = o.id
-        WHERE c.statut = 'En cours'";
-
-        $stmt = $entityManager->createQuery($sql);
-        $result = $stmt->getResult();
-
         $compteurExpert = $repository->findUserCompteur($this->getUser());
         if (count($compteurExpert) < 5) {
             if ($form->isSubmitted() && $form->isValid()) {
                 $entityManager->persist($commandes);
                 $entityManager->flush();
-                $this->addFlash("success", "La commande a bien été comfirmé");
+                $this->addFlash("success", "La commande a bien été comfirmée");
                 return $this->redirectToRoute("app_expert");
             }
         } else {
@@ -83,7 +72,7 @@ class ExpertController extends AbstractController
         return $this->render('expert/operationAjoutCommande.html.twig', [
             "commande" => $commandes,
             "form" => $form->createView(),
-            "user" => $result
+
         ]);
     }
 
