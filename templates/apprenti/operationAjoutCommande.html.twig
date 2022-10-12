@@ -24,7 +24,7 @@
 	{{ form_row(form.statut)}}
 	{{ form_row(form.client, {"attr": {"class": "btn disabled"}})}}
 	{{ form_row(form.operation)}}
-	{{ form_row(form.user)}}
+	{{ form_row(form.user,{'attr': {'value': app.user.username }})}}
 	<button type="submit" class="buttonValiderRegister">Confirmer</button>
 	{{ form_end(form) }}
 
