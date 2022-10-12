@@ -25,15 +25,16 @@
 {% endblock %}
 
 {% block main2 %}
-	<h2>Confirmer la commande</h2>
+
+	<h2>Terminer la commande</h2>
 	{{ form_start(form) }}
 	{{ form_row(form.nomCommande, {"attr": {"class": "btn disabled"}})}}
 	{{ form_row(form.date, {"attr": {"class": "btn disabled"}})}}
-	{{ form_row(form.statut)}}
+	{{ form_row(form.statut, {"attr": {"class": "btn disabled"}})}}
 	{{ form_row(form.client, {"attr": {"class": "btn disabled"}})}}
-	{{ form_row(form.operation)}}
-	{{ form_row(form.user)}}
-	<button type="submit" class="buttonValiderRegister">Confirmer</button>
+	{{ form_row(form.operation,{"attr": {"class": "btn disabled"}})}}
+	{{ form_row(form.user,{"attr": {"class": "btn disabled"}})}}
+	<button type="submit" class="btn btn-primary">Comfirmer</button>
 	{{ form_end(form) }}
 
 {% endblock %}

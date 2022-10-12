@@ -12,7 +12,7 @@ class AppFixtures extends Fixture
     {
         $op1 = new Operation();
         $op1->setNom('Nettoyage Industriel')
-            ->setDescription('Nettoyage d’usine, nettoyage de parking')
+            ->setDescription('Nettoyage d’usine, Nettoyage de parking')
             ->setPrix(10000)
             ->setTypeOperation('Grosse')
             ->setImage('operations/industriel.png');
@@ -28,7 +28,7 @@ class AppFixtures extends Fixture
 
         $op3 = new Operation();
         $op3->setNom('Nettoyage Particuliers')
-            ->setDescription('Nettoyage de maison, nettoyage de jardin')
+            ->setDescription('Nettoyage de maison, Nettoyage de jardin')
             ->setPrix(1000)
             ->setTypeOperation('Petite manœuvre')
             ->setImage('operations/maison.png');
