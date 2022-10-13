@@ -20,7 +20,7 @@ class HomeController extends AbstractController
 
         $commandeEnCours = $repository->findBy(
             array('statut' => 'En cours'),
-            array('date' => 'desc'),
+            array('date' => 'asc'),
             null,
             null
         );

@@ -7,12 +7,12 @@ JE SUIS BIEN DANS LE CONTROLLER EXPERT
 {% endblock %} #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Dashboard
+{% block title %}Tableau de Bord Expert
 {% endblock %}
 
 
 {% block navbarlists %}
-	<lu>
+	<ul>
 		<a href="{{ path('app_expert') }}">Tableau de bord</a>
 		<br/><br/>
 		<a href="{{ path('app_expert_operations') }}">Ajouter une opération</a>
@@ -28,7 +28,7 @@ JE SUIS BIEN DANS LE CONTROLLER EXPERT
 		<a href="{{ path('app_prise_commande_expert') }}">Ajouter commande client</a>
 		<br/><br/>
 		<a href="{{ path('app_home') }}">Chiffre d'affaire</a>
-	</lu>
+	</ul>
 
 {% endblock %}
 
@@ -42,11 +42,11 @@ JE SUIS BIEN DANS LE CONTROLLER EXPERT
 		<h2>Opérations en cours</h2>
 		<thead>
 			<tr>
-				<th scope="col">nom de commande</th>
-				<th scope="col">date</th>
-				<th scope="col">statut</th>
-				<th scope="col">nom du client</th>
-				<th scope="col">type d' operation</th>
+				<th scope="col">Nom de commande</th>
+				<th scope="col">Date</th>
+				<th scope="col">Statut</th>
+				<th scope="col">Nom du client</th>
+				<th scope="col">Type d' operation</th>
 			</tr>
 		</thead>
 		<tbody>

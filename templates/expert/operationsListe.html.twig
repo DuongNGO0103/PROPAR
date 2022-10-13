@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Dashboard
+{% block title %}Liste des Opérations
 {% endblock %}
 
 {% block navbarlists %}
-	<lu>
+	<ul>
 		<a href="{{ path('app_expert') }}">Tableau de bord</a>
 		<br/><br/>
 		<a href="{{ path('app_expert_operations') }}">Ajouter une opération</a>
@@ -20,46 +20,39 @@
 		<a href="{{ path('app_prise_commande_expert') }}">Ajouter commande client</a>
 		<br/><br/>
 		<a href="{{ path('app_home') }}">Chiffre d'affaire</a>
-	</lu>
+	</ul>
 
 {% endblock %}
 
 {% block main2 %}
-	<div class="cadre">
-		<table>
+	
+		<table class="table">
 			<h2>Lister mes opérations</h2>
 			<thead>
 				<tr>
-					<th scope="col">nom de commande</th>
-					<th scope="col">date</th>
-					<th scope="col">statut</th>
-					<th scope="col">nom du client</th>
-					<th scope="col">type d' operation</th>
+					<th scope="col">Nom de commande</th>
+					<th scope="col">Date</th>
+					<th scope="col">Statut</th>
+					<th scope="col">Nom du client</th>
+					<th scope="col">Type d'opération</th>
 				</tr>
 			</thead>
-			<tbody class="operations">
+			<tbody>
 				{% for commandes in commandeProfil %}
 					<tr>
+						<th scope="row">{{commandes.nomCommande}}</th>
+						<td>{{ commandes.date|date("d/m/Y") }}</td>
+						<td>{{commandes.statut}}</td>
+						<td>{{commandes.client.nom}}</td>
+						<td>{{commandes.operation.typeoperation}}</td>
 						<td>
-							{{commandes.nomCommande}}
-						</td>
-						<td>
-							{{ commandes.date|date("d/m/Y") }}</td>
-						<td>
-							{{commandes.statut}}
-						</td>
-						<td>
-							{{commandes.client.nom}}
-						</td>
-						<td>
-							{{commandes.operation.typeoperation}}
-						</td>
-						<td>
-							<a href="{{ path('expert_operations',{'id': commandes.id})}}">Modifier</a>
+						{% if commandes.statut == "En cours" %}
+							<a href="{{ path('expert_operations',{'id': commandes.id})}}" class="btn btn-primary">Modifier</a>
+						{% endif %}
 						</td>
 					</tr>
 				{% endfor %}
 			</tbody>
 		</table>
-	</div>
+
 {% endblock %}

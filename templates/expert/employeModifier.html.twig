@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register
+{% block title %}Modifier un Employé
 {% endblock %}
-{% block monTitre %}Inscription sur le site
+{% block monTitre %}Modifier un Employé
 {% endblock %}
 {% block navbarlists %}
-	<lu>
+	<ul>
 		<a href="{{ path('app_expert') }}">Tableau de bord</a>
 		<br/><br/>
 		<a href="{{ path('app_expert_operations') }}">Ajouter une opération</a>
@@ -21,7 +21,7 @@
 		<a href="{{ path('app_prise_commande_expert') }}">Ajouter commande client</a>
 		<br/><br/>
 		<a href="{{ path('app_home') }}">Chiffre d'affaire</a>
-	</lu>
+	</ul>
 {% endblock %}
 {% block main2 %}
 	{% for message in app.flashes('success') %}
@@ -30,6 +30,7 @@
 		</div>
 	{% endfor %}
 	<table class="table">
+		<h2>Modifier / Supprimer un employé</h2>
 		<thead>
 			<tr>
 				<th scope="col">ID</th>
@@ -48,7 +49,7 @@
 					<td>{{ employe.email }}</td>
 					<td>{{ employe.roles[0] }}</td>
 					<td>
-						<a href="{{path('expert_modifier',{'id': employe.id})}}" class="btn btn-primary">Modifier
+						<a href="{{path('expert_modifier',{'id': employe.id})}}" class="btn btn-warning">Modifier
 						</a>
 					</td>
 					<td>
