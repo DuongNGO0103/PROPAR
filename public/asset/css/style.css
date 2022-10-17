@@ -22,10 +22,10 @@ body {
 }
 .listLateral  {
     color: white;
-    margin-top: 30%;
-    margin-left: 10%;
+    
 }
-.listLateral a {
+.listLateral a  {
+   
     color: white;
 }
 #peremain2 {
@@ -61,4 +61,7 @@ le  class="operations" était dans le tbody de employeListe.html.twig*/
     left: 552px;
     background: #3D6A9E;
     border-radius: 10px;
-} */
+}
+#ulResultat{
+    margin-top: none!important;
+}
