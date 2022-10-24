@@ -59,7 +59,7 @@ class ExpertController extends AbstractController
         if (!$commandes) {
             $commandes = new Commande();
         }
-        // recuperation de donné grace a la methode findUserCompteur qui indique combien de commande sont 'en cours'
+        // recuperation de donné grace a la methode findUserCompteur qui indique combien de commande sont 'encours'
         //  de l'utilisateur actuel = $this->getUser() 
         $compteurCommande = $repository->findUserCompteur($this->getUser());
         // compteurCommande indique donc un tableau avec les reponses des commande = en cours 

@@ -20,9 +20,9 @@ class MailerService
     public function sendEmail(string $to): void
     {
         $email = (new Email())
-            ->from(new Address('cloudme2023@gmail.com', 'Propar'))
+            ->from(new Address('duongngo0103@gmail.com', 'Propar'))
             ->to($to)
-            //->cc('cc@example.com')
+            //->cc('cc@example.com.')
             //->bcc('bcc@example.com')
             //->replyTo('fabien@example.com')
             //->priority(Email::PRIORITY_HIGH)
@@ -31,7 +31,7 @@ class MailerService
             Votre facture est disponible ci-joint !<br><br>
             Propar vous remercie pour votre confiance !</p>")
             // ->text(fopen("/Users/mohirmehhat/Workspace/PHP/PROPAR/templates/pdf/textEmail.txt", "r"))
-            ->attachFromPath('/Users/mohirmehhat/Workspace/PHP/PROPAR/public/pdf/facture.pdf');
+            ->attachFromPath('C:\Users\59013-27-01\Desktop\PROPAR &\PROPAR\public\pdf\facture.pdf');
         // ->attachFromPath('/Users/mohirmehhat/Workspace/PHP/PROPAR/public/pdf/facture.pdf');
         $this->mailer->send($email);
     }
