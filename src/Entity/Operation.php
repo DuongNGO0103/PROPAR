@@ -17,7 +17,6 @@ class Operation
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"show_product"})
      */
     private $id;
 
@@ -38,6 +37,7 @@ class Operation
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"show_product"})
      */
     private $type_operation;
 

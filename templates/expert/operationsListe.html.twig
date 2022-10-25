@@ -27,7 +27,12 @@
 {% block main2 %}
 	<div class="cadre col-10 row p-4">
 		<h2>Lister mes opérations</h2>
-<input placeholder="Rechercher une operation" style="margin-left:30%; width: 50%"/>
+		 <div id="resultat">
+
+    </div>
+	  <form>
+<input placeholder="Rechercher une operation" id="adresse" style="margin-left:30%; width: 50%"/>
+  </form>
 		<thead>
 			<tr>
 				<th scope="col">nom de commande</th>
@@ -46,14 +51,104 @@
 						{{commandes.statut}}
 						{{commandes.client.nom}}
 						{{commandes.operation.typeoperation}}
-
 						{% if commandes.statut == "Terminer" %}
 							<a href="{{path('afficherCommande',{'id':commandes.id})}}">PDF</a>
 						{% endif %}
 					</div>
-
 				</div>
 			{% endfor %}
 		</tbody>
+		<script>
+$(document).ready(function(){
+    $("#adresse").keyup(function(e){
+        e.preventDefault();
+ 
+            $.ajax({
+            url:"https://127.0.0.1:8000/call/ajax/operationsListe",
+            type:'get',
+            data: {
+                q : $("#adresse").val(),  // Nous récupérons la valeur de nos input que l'on fait passer à connexion.php
+               // password : $("#password").val()
+            },
+            success:function(response){		
+			 //var json = $.parseJSON(response);
+				console.log(response);
+                
+                //alert(response.features[3].properties.label);
+                //$("#resultat").text(response.features[3].properties.label);
+                $("#resultat").each(function(index, value) {
+					$("#resultat").text(value.id);
+				});
+            },
+			error:function(response){
+                console.log('error');
+				//alert("error");
+            }
+        });
+
+
+        
+    });
+});
+		</script>
 	</div>
 {% endblock %}
+{#
+
+<!DOCTYPE html>
+<html>
+<head> <meta charset="utf-8" />
+    <title>Un formulaire de connexion en AJAX</title></head>
+ 
+<body>
+    <div id="resultat">
+        <!-- Nous allons afficher un retour en jQuery au visiteur -->
+    </div>
+         
+        <h1>Un formulaire de connexion en AJAX</h1>
+ 
+    <form>
+        <p>
+        Adresse : <input type="text" id="adresse" />
+        <input type="submit" id="submit" value="chercher" />
+        </p>
+    </form>
+ 
+    <script src="js/jquery-3.3.1.min.js"></script>
+</body>
+</html>
+ 
+<script>
+ 
+$(document).ready(function(){
+ 
+    $("#adresse").keyup(function(e){
+        e.preventDefault();
+ 
+            $.ajax({
+            url:"https://api-adresse.data.gouv.fr/search/?q=",
+            type:'get',
+            data: {
+                q : $("#adresse").val(),  // Nous récupérons la valeur de nos input que l'on fait passer à connexion.php
+               // password : $("#password").val()
+            },
+            success:function(response){		
+			 //var json = $.parseJSON(response);
+				console.log(response);
+                
+                //alert(response.features[3].properties.label);
+                //$("#resultat").text(response.features[3].properties.label);
+                $("#resultat").text(response.features[3].properties.label);
+            },
+			error:function(response){
+                console.log('error');
+				//alert("error");
+            }
+        });
+
+
+        
+    });
+});
+ 
+</script> #}
