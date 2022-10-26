@@ -50,12 +50,12 @@
 												<div></div>
 											</div>
 											<div class="col-5 divNcNc">
-												<div class="nomCommande">{{commandes.nomCommande}}</div>
-												<div class="nomClient">{{commandes.client.nom}}</div>
+												<div class="nomCommande">Nom Comm: {{commandes.nomCommande}}</div>
+												<div class="nomClient">Nom Client: {{commandes.client.nom}}</div>
 											</div>
 											<div class="col-3 divNcNc">
-												<div>{{commandes.operation.typeoperation}}</div>
-												<div class="divDate2">{{ commandes.date|date("d/m/Y") }}</div>
+												<div>Type: {{commandes.operation.typeoperation}}</div>
+												<div class="divDate2">Date: {{ commandes.date|date("d/m/Y") }}</div>
 											</div>
 											<div class="col-3 btnTerminer">
 												{% if commandes.statut == "Terminer" %}

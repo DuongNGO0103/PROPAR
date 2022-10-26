@@ -126,3 +126,6 @@ justify-content: end;
   display: flex;
   justify-content: space-evenly;
 }
+#btnValiderLogin{
+  background-color: var(--blueApp);
+}
