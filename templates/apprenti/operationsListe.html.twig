@@ -1,11 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Dashboard
+{% block title %}Mes Opérations
 {% endblock %}
 
-
 {% block navbarlists %}
-	<ul>
+	<lu>
 		<a href="{{ path('app_apprenti') }}">Tableau de bord</a>
 		<br/><br/>
 		<a href="{{ path('app_apprenti_operations') }}">Ajouter une opération</a>
@@ -14,26 +13,21 @@
 		<br/><br/>
 		<a href="{{ path('app_prise_commande_apprenti') }}">Ajouter commande client</a>
 		<br/><br/>
-	
-	</ul>
+	</lu>
 
 {% endblock %}
 
 {% block main2 %}
 	<!-- Row general Main2 -->
 	<div class="row p-4" id="rowMain2General">
-		{% for message in app.flashes('success') %}
-			<div class=" alert alert-success">
-				{{message}}
-			</div>
-		{% endfor %}
+		
 		<!-- container list en cours  up -->
 		<div class="col-12" id="colMain2General-up1">
 			<div class="titleLists"></div>
 			<!-- Container  title et contenu -->
 			<div class="container" id="Container_fondo_lists">
 				<div class="row" id="row_title_expert">
-					<h4 class="subtitle1">Opérations en cours</h4>
+					<h4 class="subtitle1">Mes Opérations</h4>
 				</div>
 				<div class="row " id="row_List_elemente">
 					<div class="contListElement">
@@ -53,13 +47,13 @@
 												<div class="nomClient">{{commandes.client.nom}}</div>
 											</div>
 											<div class="col-3 divNcNc">
-												<div>ii</div>
+												<div>{{commandes.operation.typeoperation}}</div>
 												<div class="divDate2">{{ commandes.date|date("d/m/Y") }}</div>
 											</div>
 											<div class="col-3 btnTerminer">
-												<form method="POST" action="{{path('apprenti_operations_terminer',{'id': commandes.id}) }}" onsubmit="return confirm('Voulez-vous vraiment terminer la commande ?');">
-													<input type="hidden" name="_token" value="{{csrf_token('SUP' ~ commandes.id)}}">
-													<input type="submit" class="btn btn-primary" value="Terminer"></form>
+												{% if commandes.statut == "Terminer" %}
+							<a href="{{path('afficherCommande',{'id':commandes.id})}}" class="btn btn-primary">PDF</a>
+						{% endif %}
 											</div>
 										</div>
 										
@@ -70,6 +64,7 @@
 
 						</div>
 					</div>
+
 				</div>
 			</div>
 
