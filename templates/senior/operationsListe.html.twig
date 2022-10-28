@@ -12,7 +12,7 @@
 		<a href="{{ path('app_senior_operations') }}">Ajouter une opération</a>
 	</li>
 	<li class='mt-4'>
-		<a href="{{ path('app_liste_operations_senior') }}">Liste mes opérations</a>
+		<a href="{{ path('app_liste_operations_senior') }}">Lister mes opérations</a>
 	</li>
 	<li class='mt-4'>
 		<a href="{{ path('app_prise_commande') }}">Ajouter commande client</a>
@@ -21,37 +21,59 @@
 
 {% block main2 %}
 	<div class="cadre">
-		<table>
-			<h2>Lister mes opérations</h2>
-			<thead>
-				<tr>
-					<th scope="col">nom de commande</th>
-					<th scope="col">date</th>
-					<th scope="col">statut</th>
-					<th scope="col">nom du client</th>
-					<th scope="col">type d' operation</th>
-				</tr>
-			</thead>
-			<tbody class="operations">
+		<h3>Lister mes opérations</h3>
+		<div class="container text-center">
+			<div class="row">
+				<div class="col">
+					<p class="titreCommande">ID</p>
+				</div>
+				<div class="col">
+					<p class="titreCommande">COMMANDE</p>
+				</div>
+				<div class="col">
+					<p class="titreCommande">DATE</p>
+				</div>
+				<div class="col">
+					<p class="titreCommande">CLIENT</p>
+				</div>
+				<div class="col">
+					<p class="titreCommande">OPERATION</p>
+				</div>
+				<div class="col">
+					<p class="titreCommande">STATUT</p>
+				</div>
+				<div class="col"></div>
+				<hr>
+			</div>
+			<div class="scroll">
 				{% for commandes in commandeProfil %}
-					<tr>
-						<td>
+					<div class="cadreRow row">
+						<div class="test col">
+							{{commandes.id}}
+						</div>
+						<div class="test col">
 							{{commandes.nomCommande}}
-						</td>
-						<td>
-							{{ commandes.date|date("d/m/Y") }}</td>
-						<td>
-							{{commandes.statut}}
-						</td>
-						<td>
+						</div>
+						<div class="test col">
+							{{ commandes.date|date("d/m/Y") }}
+						</div>
+						<div class="test col">
 							{{commandes.client.nom}}
-						</td>
-						<td>
+						</div>
+						<div class="test col">
 							{{commandes.operation.typeoperation}}
-						</td>
-					</tr>
+						</div>
+						<div class="test col">
+							{{commandes.statut}}
+						</div>
+						<div class="test col">
+							{% if commandes.statut == "Terminer" %}
+								<a href="{{path('afficherCommande',{'id':commandes.id})}}" style="color:#3D6A9E" class="boutton">PDF</a>
+								{# <button type="submit" class="btn btn-primary">Modifier</button> #}
+							{% endif %}
+						</div>
+					</div>
 				{% endfor %}
-			</tbody>
-		</table>
-	</div>
-{% endblock %}
+			</div>
+		</div>
+	{% endblock %}

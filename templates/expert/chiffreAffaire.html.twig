@@ -59,29 +59,36 @@
 	</style>
 {% endblock %}
 {% block navbarlists %}
-	<lu>
+	<li>
 		<a href="{{ path('app_expert') }}">Tableau de bord</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('app_expert_operations') }}">Ajouter une opération</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('app_liste_operations') }}">Lister mes opérations</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('liste_employe') }}">Liste des employés</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('inscription') }}">Ajouter un employé</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('liste_employe_modifier') }}">Modifier un employé</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('app_prise_commande_expert') }}">Ajouter commande client</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('app_chiffre_affaire') }}">Chiffre d'affaire</a>
-	</lu>
+	</li>
 
 {% endblock %}
 
 {% block main2 %}
 
-
+	<h3>Chiffre d'affaire de l'entreprise</h3>
 	<figure class="highcharts-figure">
 		<div id="container"></div>
 
@@ -104,13 +111,13 @@ alpha: 45
 }
 },
 title: {
-text: "Chiffre d'affaire de l'entreprise"
+text: ""
 },
 
 plotOptions: {
 pie: {
 innerSize: 190,
-depth: 60
+depth: 70
 }
 },
 series: [

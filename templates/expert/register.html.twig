@@ -5,29 +5,40 @@
 {% block monTitre %}Inscription sur le site
 {% endblock %}
 {% block navbarlists %}
-	<lu>
+	<li>
 		<a href="{{ path('app_expert') }}">Tableau de bord</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('app_expert_operations') }}">Ajouter une opération</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('app_liste_operations') }}">Lister mes opérations</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('liste_employe') }}">Liste des employés</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('inscription') }}">Ajouter un employé</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('liste_employe_modifier') }}">Modifier un employé</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('app_prise_commande_expert') }}">Ajouter commande client</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('app_chiffre_affaire') }}">Chiffre d'affaire</a>
-	</lu>
+	</li>
 
 {% endblock %}
 
 {% block main2 %}
 	<div class='cadreRegister'>
-
+		{% for message in app.flashes('ajoutEmploye') %}
+			<div class="alert alert-success">
+				{{message}}
+			</div>
+		{% endfor %}
 		<h3>Ajouter un employé</h3>
 		{{ form_start(registrationForm) }}
 		{{ form_row(registrationForm.nom)}}

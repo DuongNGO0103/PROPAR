@@ -12,7 +12,7 @@
 		<a href="{{ path('app_senior_operations') }}">Ajouter une opération</a>
 	</li>
 	<li class='mt-4'>
-		<a href="{{ path('app_liste_operations_senior') }}">Liste mes opérations</a>
+		<a href="{{ path('app_liste_operations_senior') }}">Lister mes opérations</a>
 	</li>
 	<li class='mt-4'>
 		<a href="{{ path('app_prise_commande') }}">Ajouter commande client</a>
@@ -20,47 +20,59 @@
 {% endblock %}
 
 {% block main2 %}
-	{% for message in app.flashes('wrong') %}
-		<div class="alert alert-danger">
-			{{message}}
+	<div class="cadre">
+		{% for message in app.flashes('wrong') %}
+			<div class="alert alert-danger">
+				{{message}}
+			</div>
+		{% endfor %}
+		<h3>Opérations en attente</h3>
+		<div class="container text-center">
+			<div class="row">
+				<div class="col">
+					<p class="titreCommande">ID</p>
+				</div>
+				<div class="col">
+					<p class="titreCommande">COMMANDE</p>
+				</div>
+				<div class="col">
+					<p class="titreCommande">DATE</p>
+				</div>
+				<div class="col">
+					<p class="titreCommande">CLIENT</p>
+				</div>
+				<div class="col">
+					<p class="titreCommande">OPERATION</p>
+				</div>
+				<div class="col"></div>
+				<hr>
+			</div>
+			<div class="scroll">
+				{% for commandes in commandeEnAttente %}
+					<div class="cadreRow row">
+						<div class="test col">
+							{{commandes.id}}
+						</div>
+						<div class="test col">
+							{{commandes.nomCommande}}
+						</div>
+						<div class="test col">
+							{{ commandes.date|date("d/m/Y") }}
+						</div>
+						<div class="test col ">
+							{{commandes.client.nom}}
+						</div>
+						<div class="test col ">
+							{{commandes.operation.typeoperation}}
+						</div>
+						<div class="test col ">
+							<form method="post" action="{{path('senior_operations',{'id': commandes.id}) }}" onsubmit="return confirm('Voulez-vous vraiment Ajouter la commande ?');">
+								<input type="submit" class="btn" style="background-color:#CBC6C5; margin-bottom:6%;color:#3D6A9E " value="Ajouter">
+							</form>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
 		</div>
-	{% endfor %}
-	<table>
-		<h2>Liste des opérations en attente</h2>
-		<thead>
-			<tr>
-				<th scope="col">nom de commande</th>
-				<th scope="col">date</th>
-				<th scope="col">statut</th>
-				<th scope="col">nom du client</th>
-				<th scope="col">type d' operation</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for commandes in commandeEnAttente %}
-				<tr>
-					<td>
-						{{commandes.nomCommande}}
-					</td>
-					<td>
-						{{ commandes.date|date("d/m/Y") }}</td>
-					<td>
-						{{commandes.statut}}
-					</td>
-					<td>
-						{{commandes.client.nom}}
-					</td>
-					<td>
-						{{commandes.operation.typeoperation}}
-					</td>
-					<td>
-						<form method="post" class="col" action="{{path('senior_operations',{'id': commandes.id}) }}" onsubmit="return confirm('Voulez-vous vraiment Ajouter la commande ?');">
-
-							<input type="submit" class="btn btn-success" value="ajouter">
-						</form>
-					</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
+	</div>
 {% endblock %}

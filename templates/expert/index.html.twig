@@ -5,62 +5,83 @@
 
 
 {% block navbarlists %}
-	<lu>
+	<li>
 		<a href="{{ path('app_expert') }}">Tableau de bord</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('app_expert_operations') }}">Ajouter une opération</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('app_liste_operations') }}">Lister mes opérations</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('liste_employe') }}">Liste des employés</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('inscription') }}">Ajouter un employé</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('liste_employe_modifier') }}">Modifier un employé</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('app_prise_commande_expert') }}">Ajouter commande client</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('app_chiffre_affaire') }}">Chiffre d'affaire</a>
-	</lu>
+	</li>
 
 {% endblock %}
 
 {% block main2 %}
-	<div class="cadre col-10 row p-4">
-		{% for message in app.flashes('success') %}
-			<div class=" alert alert-success">
-				{{message}}
+
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success">
+			{{message}}
+		</div>
+	{% endfor %}
+	<h3>Opérations en cours</h3>
+	<div class="container text-center">
+		<div class="row">
+			<div class="col">
+				<p class="titreCommande">ID</p>
 			</div>
-		{% endfor %}
-		<table>
-			<h2>Opérations en cours</h2>
-			<thead>
-				<tr>
-					<th scope="col">nom de commande</th>
-					<th scope="col">date</th>
-					<th scope="col">nom du client</th>
-					<th scope="col">type d' operation</th>
-				</tr>
-			</thead>
-		</table>
+			<div class="col">
+				<p class="titreCommande">COMMANDE</p>
+			</div>
+			<div class="col">
+				<p class="titreCommande">DATE</p>
+			</div>
+			<div class="col">
+				<p class="titreCommande">CLIENT</p>
+			</div>
+			<div class="col">
+				<p class="titreCommande">OPERATION</p>
+			</div>
+			<div class="col"></div>
+			<hr>
+		</div>
 		{% for commandes in commandeProfil %}
-			<div class="parent">
-				<div class="div1">
+			<div class="row">
+				<div class=" col">
+					{{commandes.id}}
+				</div>
+				<div class=" col">
 					{{commandes.nomCommande}}
 				</div>
-				<div class="div1">
+				<div class=" col">
 					{{ commandes.date|date("d/m/Y") }}
 				</div>
-				<div class="div1">
+				<div class=" col">
 					{{commandes.client.nom}}
 				</div>
-				<div class="div1">
+				<div class=" col">
 					{{commandes.operation.typeoperation}}
 				</div>
-				<div class="div1">
-					<form method="post" action="{{path('expert_operations_terminer',{'id': commandes.id}) }}" onsubmit="return confirm('Voulez-vous vraiment terminer la commande ?');">
+				<div class=" col">
+					<form method="post" action="{{path('senior_operations_terminer',{'id': commandes.id}) }}" onsubmit="return confirm('Voulez-vous vraiment terminer la commande ?');">
 						<input type="hidden" name="_token" value="{{csrf_token('SUP' ~ commandes.id)}}">
-						<input type="submit" class="btn btn-successs" value="Terminer"></form>
+						<input type="submit" class="btn" style="background-color:#CBC6C5; margin-bottom:6%;color:#3D6A9E " value="Terminer">
+					</form>
 				</div>
 			</div>
 		{% endfor %}

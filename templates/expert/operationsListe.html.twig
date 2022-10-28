@@ -4,151 +4,121 @@
 {% endblock %}
 
 {% block navbarlists %}
-	<lu>
+	<li>
 		<a href="{{ path('app_expert') }}">Tableau de bord</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('app_expert_operations') }}">Ajouter une opération</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('app_liste_operations') }}">Lister mes opérations</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('liste_employe') }}">Liste des employés</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('inscription') }}">Ajouter un employé</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('liste_employe_modifier') }}">Modifier un employé</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('app_prise_commande_expert') }}">Ajouter commande client</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('app_chiffre_affaire') }}">Chiffre d'affaire</a>
-	</lu>
+	</li>
 
 {% endblock %}
 
 {% block main2 %}
-	<div class="cadre col-10 row p-4">
-		<h2>Lister mes opérations</h2>
-		 <div id="resultat">
 
-    </div>
-	  <form>
-<input placeholder="Rechercher une operation" id="adresse" style="margin-left:30%; width: 50%"/>
-  </form>
-		<thead>
-			<tr>
-				<th scope="col">nom de commande</th>
-				<th scope="col">date</th>
-				<th scope="col">statut</th>
-				<th scope="col">nom du client</th>
-				<th scope="col">type d' operation</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for commandes in commandeProfil %}
-				<div class="parent">
-					<div class="div1">
-						{{commandes.nomCommande}}
-						{{ commandes.date|date("d/m/Y") }}
-						{{commandes.statut}}
-						{{commandes.client.nom}}
-						{{commandes.operation.typeoperation}}
-						{% if commandes.statut == "Terminer" %}
-							<a href="{{path('afficherCommande',{'id':commandes.id})}}">PDF</a>
-						{% endif %}
-					</div>
+	<h3>Lister mes opérations</h3>
+
+	<input id='adresse'>
+	<div class="container text-center">
+		<div class="row">
+			<div class="col">
+				<p class="titreCommande">ID</p>
+			</div>
+			<div class="col">
+				<p class="titreCommande">COMMANDE</p>
+			</div>
+			<div class="col">
+				<p class="titreCommande">DATE</p>
+			</div>
+			<div class="col">
+				<p class="titreCommande">CLIENT</p>
+			</div>
+			<div class="col">
+				<p class="titreCommande">OPERATION</p>
+			</div>
+			<div class="col">
+				<p class="titreCommande">STATUT</p>
+			</div>
+			<div class="col"></div>
+			<hr>
+		</div>
+		<div id="resultat"></div>
+		{% for commandes in commandeProfil %}
+			<div class=" row" style="margin-top:3%">
+				<div class=" col">
+					{{commandes.id}}
 				</div>
-			{% endfor %}
-		</tbody>
+				<div class=" col">
+					{{commandes.nomCommande}}
+				</div>
+				<div class=" col">
+					{{ commandes.date|date("d/m/Y") }}
+				</div>
+				<div class=" col">
+					{{commandes.client.nom}}
+				</div>
+				<div class=" col">
+					{{commandes.operation.typeoperation}}
+				</div>
+				<div class=" col">
+					{{commandes.statut}}
+				</div>
+				<div class=" col">
+					{% if commandes.statut == "Terminer" %}
+						<a href="{{path('afficherCommande',{'id':commandes.id})}}" style="color:#3D6A9E" class="boutton">PDF</a>
+						{# <button type="submit" class="btn btn-primary">Modifier</button> #}
+					{% endif %}
+				</div>
+			</div>
+		{% endfor %}
+
 		<script>
-$(document).ready(function(){
-    $("#adresse").keyup(function(e){
-        e.preventDefault();
- 
-            $.ajax({
-            url:"https://127.0.0.1:8000/call/ajax/operationsListe",
-            type:'get',
-            data: {
-                q : $("#adresse").val(),  // Nous récupérons la valeur de nos input que l'on fait passer à connexion.php
-               // password : $("#password").val()
-            },
-            success:function(response){		
-			 //var json = $.parseJSON(response);
-				console.log(response);
-                
-                //alert(response.features[3].properties.label);
-                //$("#resultat").text(response.features[3].properties.label);
-                $("#resultat").each(function(index, value) {
-					$("#resultat").text(value.id);
-				});
-            },
-			error:function(response){
-                console.log('error');
-				//alert("error");
-            }
-        });
+			$(document).ready(function () {
+$("#adresse").keyup(function (e) {
+e.preventDefault();
+
+$.ajax({
+url: "https://127.0.0.1:8000/call/ajax/operationsListe",
+type: 'GET',
+data: {
+q: $("#adresse").val()
+
+},
+success: function (response) { // var json = $.parseJSON(response);
+
+$.each(response, function (index, value) {
+
+$("#resultat").append(value.id + " " + value.nomCommande + " " + value.client.nom + " " + value.operation.type_operation + " " + value.date);
 
 
-        
-    });
+});
+},
+error: function (response) {
+console.log(error)
+}
+});
+
+
+});
 });
 		</script>
+
 	</div>
 {% endblock %}
-{#
-
-<!DOCTYPE html>
-<html>
-<head> <meta charset="utf-8" />
-    <title>Un formulaire de connexion en AJAX</title></head>
- 
-<body>
-    <div id="resultat">
-        <!-- Nous allons afficher un retour en jQuery au visiteur -->
-    </div>
-         
-        <h1>Un formulaire de connexion en AJAX</h1>
- 
-    <form>
-        <p>
-        Adresse : <input type="text" id="adresse" />
-        <input type="submit" id="submit" value="chercher" />
-        </p>
-    </form>
- 
-    <script src="js/jquery-3.3.1.min.js"></script>
-</body>
-</html>
- 
-<script>
- 
-$(document).ready(function(){
- 
-    $("#adresse").keyup(function(e){
-        e.preventDefault();
- 
-            $.ajax({
-            url:"https://api-adresse.data.gouv.fr/search/?q=",
-            type:'get',
-            data: {
-                q : $("#adresse").val(),  // Nous récupérons la valeur de nos input que l'on fait passer à connexion.php
-               // password : $("#password").val()
-            },
-            success:function(response){		
-			 //var json = $.parseJSON(response);
-				console.log(response);
-                
-                //alert(response.features[3].properties.label);
-                //$("#resultat").text(response.features[3].properties.label);
-                $("#resultat").text(response.features[3].properties.label);
-            },
-			error:function(response){
-                console.log('error');
-				//alert("error");
-            }
-        });
-
-
-        
-    });
-});
- 
-</script> #}

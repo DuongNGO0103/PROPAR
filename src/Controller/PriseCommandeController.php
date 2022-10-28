@@ -59,7 +59,6 @@ class PriseCommandeController extends AbstractController
         ]);
     }
 
-
     /**
      * @Route("/apprenti/prise/commande", name="app_prise_commande_apprenti")
      */

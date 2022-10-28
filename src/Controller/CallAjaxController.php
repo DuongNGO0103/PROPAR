@@ -22,9 +22,13 @@ class CallAjaxController extends AbstractController
             null,
             null
         );
-        $result = $normalizer->normalize($commandeProfil, 'json', ['groups' => 'show_product']);
-        return $this->json(
-            $result
-        );
+        $commandes = $normalizer->normalize($commandeProfil, 'json', ['groups' => 'show_product']);
+        $response = new JsonResponse();
+        $response->setData($commandes);
+
+        $response->headers->set('Content-Type', 'application/json');
+        $response->headers->set("Access-Control-Allow-Origin", "*");
+
+        return $response;
     }
 }

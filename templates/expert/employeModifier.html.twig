@@ -5,23 +5,30 @@
 {% block monTitre %}Inscription sur le site
 {% endblock %}
 {% block navbarlists %}
-	<lu>
+	<li>
 		<a href="{{ path('app_expert') }}">Tableau de bord</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('app_expert_operations') }}">Ajouter une opération</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('app_liste_operations') }}">Lister mes opérations</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('liste_employe') }}">Liste des employés</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('inscription') }}">Ajouter un employé</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('liste_employe_modifier') }}">Modifier un employé</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('app_prise_commande_expert') }}">Ajouter commande client</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('app_chiffre_affaire') }}">Chiffre d'affaire</a>
-	</lu>
+	</li>
 {% endblock %}
 {% block main2 %}
 	{% for message in app.flashes('success') %}
@@ -29,14 +36,15 @@
 			{{message}}
 		</div>
 	{% endfor %}
+	<h3>Modifier un employé</h3>
 	<table class="table">
 		<thead>
-			<tr>
+			<tr style="color:#3D6A9E">
 				<th scope="col">ID</th>
-				<th scope="col">Nom</th>
-				<th scope="col">Prenom</th>
-				<th scope="col">Email</th>
-				<th scope="col">Role</th>
+				<th scope="col">NOM</th>
+				<th scope="col">PRENOM</th>
+				<th scope="col">EMAIL</th>
+				<th scope="col">ROLE</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -48,18 +56,18 @@
 					<td>{{ employe.email }}</td>
 					<td>{{ employe.roles[0] }}</td>
 					<td>
-						<a href="{{path('expert_modifier',{'id': employe.id})}}" class="btn btn-primary">Modifier
+						<a href="{{path('expert_modifier',{'id': employe.id})}}" class="btn" style="background-color:grey"><img src="{{asset('asset/img/editer.png')}}" style="height:20px;width:20px" alt="">
 						</a>
 					</td>
 					<td>
 						<form method="post" class="col" action="{{path('employe_delete',{'id': employe.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer?');">
 							<input type="hidden" name="_method" value="delete">
 							<input type="hidden" name="_token" value="{{csrf_token('SUP' ~ employe.id)}}">
-							<input type="submit" class="btn btn-danger" value="supprimer" onsubmit="return confirm('Confirmer la suppression ?')">
+							<input type="submit" class="btn btn-danger" style="height:33px" value="X">
 						</form>
 					</td>
 				</tr>
 			{% endfor %}
 		</tbody>
-	</tbody>
-</table>{% endblock %}
+	</table>
+{% endblock %}

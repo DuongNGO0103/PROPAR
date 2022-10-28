@@ -5,23 +5,30 @@
 {% block monTitre %}Inscription sur le site
 {% endblock %}
 {% block navbarlists %}
-	<lu>
+	<li>
 		<a href="{{ path('app_expert') }}">Tableau de bord</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('app_expert_operations') }}">Ajouter une opération</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('app_liste_operations') }}">Lister mes opérations</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('liste_employe') }}">Liste des employés</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('inscription') }}">Ajouter un employé</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('liste_employe_modifier') }}">Modifier un employé</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('app_prise_commande_expert') }}">Ajouter commande client</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('app_chiffre_affaire') }}">Chiffre d'affaire</a>
-	</lu>
+	</li>
 {% endblock %}
 {% block main2 %}
 	{% for message in app.flashes('success') %}
@@ -29,14 +36,15 @@
 			{{message}}
 		</div>
 	{% endfor %}
+	<h3>Liste des employés</h3>
 	<table class="table">
 		<thead>
-			<tr>
+			<tr style="color:#3D6A9E">
 				<th scope="col">ID</th>
-				<th scope="col">Nom</th>
-				<th scope="col">Prenom</th>
-				<th scope="col">Email</th>
-				<th scope="col">Role</th>
+				<th scope="col">NOM</th>
+				<th scope="col">PRENOM</th>
+				<th scope="col">EMAIL</th>
+				<th scope="col">ROLE</th>
 			</tr>
 		</thead>
 		<tbody>

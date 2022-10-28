@@ -2,14 +2,18 @@
 
 namespace App\Controller;
 
+use Dompdf\Dompdf;
 use App\Entity\Commande;
+use App\Service\MailerService;
 use App\Repository\CommandeRepository;
 use App\Form\RegistrationOperationType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Form\RegistrationOperationTerminerType;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SeniorController extends AbstractController
@@ -21,7 +25,6 @@ class SeniorController extends AbstractController
     {
         $commandeProfil = $repository->findOperationUserEncours($this->getUser());
         return $this->render('senior/index.html.twig', [
-            'controller_name' => 'SeniorController',
             'commandeProfil' => $commandeProfil,
         ]);
     }
@@ -29,22 +32,45 @@ class SeniorController extends AbstractController
     /**
      * @Route("/senior{id}", name="senior_operations_terminer", methods="POST|GET")
      */
-    public function terminerOperation(CommandeRepository $repository, Commande $commandes = null, Request $request, EntityManagerInterface $entityManager): Response
-    { {
-            if (!$commandes) {
-                $commandes = new Commande();
-            }
-        }
-        $user = $this->getUser();
-        $compteurCommande = $repository->findUserCompteur($this->getUser());
-        $compteurCommande = count($compteurCommande);
+    public function terminerOperation(KernelInterface $kernelInterface, MailerService $mailer, Commande $commandes = null, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        // stockage du template de la facure dans la variable html
+        $html =  $this->renderView('pdf/basepdf.html.twig', [
+            "commande" => $commandes,
+        ]);
+        // creation d'un nouveau pdf 
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($html);
+        $dompdf->render();
+        $result = $dompdf->output();
 
-        $commandes->setUser($user);
+        // creation du fichier facture.pdf dans le dossier public/pdf/
+        $fs = new Filesystem();
+        $FilePdf = $kernelInterface->getProjectDir() . "/public/pdf";
+        $pdf = $FilePdf . "/facture.pdf";
+        $fs->dumpFile($pdf, $result);
+
+        if (!$commandes) {
+            $commandes = new Commande();
+        }
+        //  modifie le statut, ajoute l'id de l'utilisateur actuel et insere en bdd
+        $commandes->setUser($this->getUser());
         $commandes->setStatut("Terminer");
+
+        //recuperation de l'email du client
+        $email = $commandes->getClient()->getEmail();
+
+        //insertion en bdd
         $entityManager->persist($commandes);
         $entityManager->flush();
-        $this->addFlash("success", "La commande a bien été traité");
 
+        // Envoi de l'email au client <<<<<<<<<<<
+        $mailer->sendEmail($email);
+
+        //message de validation
+        $this->addFlash("success", "L'operation est terminé, un email de confirmation a été envoyé au client.");
+
+        //redirection vers la page actuelle
         return $this->redirectToRoute("app_senior");
     }
 
@@ -71,7 +97,7 @@ class SeniorController extends AbstractController
     {
         $commandeProfil = $repository->findBy(
             array('user' =>  $this->getUser()),
-            array('date' => 'desc'),
+            array('id' => 'desc'),
             null,
             null
         );
@@ -88,18 +114,26 @@ class SeniorController extends AbstractController
         if (!$commandes) {
             $commandes = new Commande();
         }
-        $user = $this->getUser();
+        // recuperation de donné grace a la methode findUserCompteur qui indique combien de commande sont 'en cours'
+        //  de l'utilisateur actuel = $this->getUser() 
         $compteurCommande = $repository->findUserCompteur($this->getUser());
+        // compteurCommande indique donc un tableau avec les reponses des commande = en cours 
+        // la fonction count est utilisé afin de convertir le resultat en tableau en integer afin de comparer
         $compteurCommande = count($compteurCommande);
-
+        // on compare donc cette donnée a 5 pour l'expert 
         if ($compteurCommande < 3) {
-            $commandes->setUser($user);
+            //modification en settant l'utilisateur actuel et le statut en cours 
+            $commandes->setUser($this->getUser());
             $commandes->setStatut("En cours");
             $entityManager->persist($commandes);
             $entityManager->flush();
-            $this->addFlash("success", "La commande a bien été confirmé");
+
+            //message de validation 
+            $this->addFlash("successs", "L'operation a bien été ajouté.");
+            //redirection
             return $this->redirectToRoute("app_senior_operations");
         } else {
+            //si la comparaion n'est pas plus petit que 5 alors elle affiche message d'erreur et redirige
             $this->addFlash("wrong", "Vous avez atteint le nombre maximum d'operations ! veuillez terminer une opération afin de pouvoir en traiter une nouvelle.");
             return $this->redirectToRoute("app_senior_operations");
         }

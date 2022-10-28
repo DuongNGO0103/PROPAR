@@ -5,62 +5,74 @@
 
 
 {% block navbarlists %}
-	<li class='mt-4'>
+
+	<li class='btn-hover color-1 mt-4'>
 		<a href="{{ path('app_senior') }}">Tableau de bord</a>
 	</li>
-	<li class='mt-4'>
+	<li class='btn-hover mt-4'>
 		<a href="{{ path('app_senior_operations') }}">Ajouter une opération</a>
 	</li>
-	<li class='mt-4'>
-		<a href="{{ path('app_liste_operations_senior') }}">Liste mes opérations</a>
+	<li class='btn-hover mt-4'>
+		<a href="{{ path('app_liste_operations_senior') }}">Lister mes opérations</a>
 	</li>
-	<li class='mt-4'>
+	<li class='btn-hover mt-4'>
 		<a href="{{ path('app_prise_commande') }}">Ajouter commande client</a>
 	</li>
 {% endblock %}
 
 {% block main2 %}
-	{% for message in app.flashes('success') %}
-		<div class="alert alert-success">
-			{{message}}
-		</div>
-	{% endfor %}
-	<table>
-		<h2>Opérations en cours</h2>
-		<thead>
-			<tr>
-				<th scope="col">nom de commande</th>
-				<th scope="col">date</th>
-				<th scope="col">statut</th>
-				<th scope="col">nom du client</th>
-				<th scope="col">type d' operation</th>
-			</tr>
-		</thead>
-		<tbody>
+	<div class="cadre">
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success">
+				{{message}}
+			</div>
+		{% endfor %}
+		<h3>Opérations en cours</h3>
+		<div class="container text-center">
+			<div class="row">
+				<div class="col">
+					<p class="titreCommande">ID</p>
+				</div>
+				<div class="col">
+					<p class="titreCommande">COMMANDE</p>
+				</div>
+				<div class="col">
+					<p class="titreCommande">DATE</p>
+				</div>
+				<div class="col">
+					<p class="titreCommande">CLIENT</p>
+				</div>
+				<div class="col">
+					<p class="titreCommande">OPERATION</p>
+				</div>
+				<div class="col"></div>
+				<hr>
+			</div>
 			{% for commandes in commandeProfil %}
-				<tr>
-					<td>
+				<div class="cadreRow row">
+					<div class="test col">
+						{{commandes.id}}
+					</div>
+					<div class="test col">
 						{{commandes.nomCommande}}
-					</td>
-					<td>
-						{{ commandes.date|date("d/m/Y") }}</td>
-					<td>
-						{{commandes.statut}}
-					</td>
-					<td>
+					</div>
+					<div class="test col">
+						{{ commandes.date|date("d/m/Y") }}
+					</div>
+					<div class="test col">
 						{{commandes.client.nom}}
-					</td>
-					<td>
+					</div>
+					<div class="test col">
 						{{commandes.operation.typeoperation}}
-					</td>
-					<td>
-						<form method="post" class="col" action="{{path('senior_operations_terminer',{'id': commandes.id}) }}" onsubmit="return confirm('Voulez-vous vraiment terminer la commande ?');">
+					</div>
+					<div class="test col">
+						<form method="post" action="{{path('senior_operations_terminer',{'id': commandes.id}) }}" onsubmit="return confirm('Voulez-vous vraiment terminer la commande ?');">
 							<input type="hidden" name="_token" value="{{csrf_token('SUP' ~ commandes.id)}}">
-							<input type="submit" class="btn btn-success" value="Terminer">
+							<input type="submit" class="btn" style="background-color:#CBC6C5; margin-bottom:6%;color:#3D6A9E " value="Terminer">
 						</form>
-					</td>
-				</tr>
+					</div>
+				</div>
 			{% endfor %}
-		</tbody>
-	</table>
+		</div>
+	</div>
 {% endblock %}

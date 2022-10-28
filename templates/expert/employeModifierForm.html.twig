@@ -9,24 +9,30 @@
 
 
 {% block navbarlists %}
-	<lu>
+	<li>
 		<a href="{{ path('app_expert') }}">Tableau de bord</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('app_expert_operations') }}">Ajouter une opération</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('app_liste_operations') }}">Lister mes opérations</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('liste_employe') }}">Liste des employés</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('inscription') }}">Ajouter un employé</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('liste_employe_modifier') }}">Modifier un employé</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('app_prise_commande_expert') }}">Ajouter commande client</a>
-		<br/><br/>
+	</li>
+	<li>
 		<a href="{{ path('app_chiffre_affaire') }}">Chiffre d'affaire</a>
-	</lu>
-
+	</li>
 {% endblock %}
 
 {% block main2 %}
@@ -40,7 +46,8 @@
 		{{ form_row(form.prenom)}}
 		{{ form_row(form.email)}}
 		{{ form_row(form.roles)}}
-		<button type="submit" class="btn btn-primary">Modifier</button>
+		{# <button type="submit" class="btn btn-primary">Modifier</button> #}
+		<input type="submit" class="btn" style="background-color:#CBC6C5;margin-left:1%; margin-bottom:5%;color:#3D6A9E; width:10%" value="Modifier">
 		{{ form_end(form) }}
 
 	</table>
