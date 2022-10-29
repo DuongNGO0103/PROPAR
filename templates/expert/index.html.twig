@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Dashboard
+{% block title %}Tableau de bord
 {% endblock %}
 
 
@@ -33,7 +33,6 @@
 {% endblock %}
 
 {% block main2 %}
-
 	{% for message in app.flashes('success') %}
 		<div class="alert alert-success">
 			{{message}}
@@ -78,7 +77,7 @@
 					{{commandes.operation.typeoperation}}
 				</div>
 				<div class=" col">
-					<form method="post" action="{{path('senior_operations_terminer',{'id': commandes.id}) }}" onsubmit="return confirm('Voulez-vous vraiment terminer la commande ?');">
+					<form method="post" action="{{path('expert_operations_terminer',{'id': commandes.id}) }}" onsubmit="return confirm('Voulez-vous vraiment terminer la commande ?');">
 						<input type="hidden" name="_token" value="{{csrf_token('SUP' ~ commandes.id)}}">
 						<input type="submit" class="btn" style="background-color:#CBC6C5; margin-bottom:6%;color:#3D6A9E " value="Terminer">
 					</form>

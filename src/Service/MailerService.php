@@ -30,9 +30,8 @@ class MailerService
             ->html("<p>Bonjour<br><br>
             Votre facture est disponible ci-joint !<br><br>
             Propar vous remercie pour votre confiance !</p>")
-            // ->text(fopen("/Users/mohirmehhat/Workspace/PHP/PROPAR/templates/pdf/textEmail.txt", "r"))
-            ->attachFromPath('/Users/mohirmehhat/Workspace/PHP/PROPAR/public/pdf/facture.pdf');
-        // ->attachFromPath('/Users/mohirmehhat/Workspace/PHP/PROPAR/public/pdf/facture.pdf');
+            //renseignez votre chemin ou ce situe le fichier facture.pdf dans le dossier public/pdf/...
+            ->attachFromPath('Votre chemin ici !!');
         $this->mailer->send($email);
     }
 }

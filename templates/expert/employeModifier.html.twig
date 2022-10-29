@@ -1,9 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register
+{% block title %}Modification employés
 {% endblock %}
-{% block monTitre %}Inscription sur le site
-{% endblock %}
+
 {% block navbarlists %}
 	<li>
 		<a href="{{ path('app_expert') }}">Tableau de bord</a>
@@ -56,14 +55,14 @@
 					<td>{{ employe.email }}</td>
 					<td>{{ employe.roles[0] }}</td>
 					<td>
-						<a href="{{path('expert_modifier',{'id': employe.id})}}" class="btn" style="background-color:grey"><img src="{{asset('asset/img/editer.png')}}" style="height:20px;width:20px" alt="">
+						<a href="{{path('expert_modifier',{'id': employe.id})}}" class="btn" style="background-color:#CBC6C5;height:38px;width:40px"><img src="{{asset('asset/img/editer.png')}}" style="height:20px;width:17px" alt="Modifier">
 						</a>
 					</td>
 					<td>
-						<form method="post" class="col" action="{{path('employe_delete',{'id': employe.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer?');">
+						<form method="post" action="{{path('employe_delete',{'id': employe.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer?');">
 							<input type="hidden" name="_method" value="delete">
 							<input type="hidden" name="_token" value="{{csrf_token('SUP' ~ employe.id)}}">
-							<input type="submit" class="btn btn-danger" style="height:33px" value="X">
+							<input type="submit" class="btn btn-danger" style="height:38px;width:40px" value="X">
 						</form>
 					</td>
 				</tr>

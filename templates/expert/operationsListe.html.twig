@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Dashboard
+{% block title %}Mes opérations
 {% endblock %}
 
 {% block navbarlists %}
@@ -34,8 +34,9 @@
 {% block main2 %}
 
 	<h3>Lister mes opérations</h3>
+	<input id='adresse' type="text" placeholder="Recherche par id ou client" class="searchBar form-control">
+	<p class="resultat row"></p>
 
-	<input id='adresse'>
 	<div class="container text-center">
 		<div class="row">
 			<div class="col">
@@ -59,9 +60,10 @@
 			<div class="col"></div>
 			<hr>
 		</div>
-		<div id="resultat"></div>
+		{# /////AFFICHAGE REPONSE///// #}
+
 		{% for commandes in commandeProfil %}
-			<div class=" row" style="margin-top:3%">
+			<div class=" row" style="margin-top:3%;">
 				<div class=" col">
 					{{commandes.id}}
 				</div>
@@ -90,35 +92,63 @@
 		{% endfor %}
 
 		<script>
+
 			$(document).ready(function () {
 $("#adresse").keyup(function (e) {
 e.preventDefault();
+e.stopPropagation();
+let input = $("#adresse").val();
+if (input.length === 0) {
+$('.resultat').empty();
+return false;
+}
 
 $.ajax({
-url: "https://127.0.0.1:8000/call/ajax/operationsListe",
+url: "https://localhost:8000/call/ajax/operationsListe",
 type: 'GET',
 data: {
 q: $("#adresse").val()
-
 },
-success: function (response) { // var json = $.parseJSON(response);
-
-$.each(response, function (index, value) {
-
-$("#resultat").append(value.id + " " + value.nomCommande + " " + value.client.nom + " " + value.operation.type_operation + " " + value.date);
 
 
+success: function (response) {
+
+let liste = "";
+$.each(response, function (index, value) { // J'ajoute chaque élément dans une liste
+console.log(value.id)
+if (input == value.client.nom.toLowerCase() || input == value.id) {
+liste += '<div class=" row" style="margin-top:3%; border:solid 1px #CBC6C5;padding:10px">' + '<div class="id col">' + value.id + '</div>' + '<div class="com col">' + value.nomCommande + '</div>' + '<div class="date col">' + new Date(value.date).toLocaleDateString() + '</div>' + '<div class="client col">' + value.client.nom + '</div>' + '<div class="ope col">' + value.operation.type_operation + '</div>' + '<div class="statut col">' + value.statut + '</div>' + '<div class="pdf col">' + "<a href=https://localhost:8000/pdf/" + value.id + " style='color:#3D6A9E' class='boutton'>" + " PDF " + '</a>' + '</div>' + '</div>'
+}
 });
+$('.resultat').html(liste);
 },
+
+
 error: function (response) {
 console.log(error)
 }
 });
-
-
 });
 });
 		</script>
-
 	</div>
 {% endblock %}
+{# liste += '<div class=" row" style="margin-top:3%">' + '<div class="id col">' + value.id + '</div>' + '<div class="com col">' + value.nomCommande + '</div>' + '<div class="date col">' + new Date(value.date).toLocaleDateString() + '</div>' + '<div class="client col">' + value.client.nom + '</div>' + '<div class="ope col">' + value.operation.type_operation + '</div>' + '<div class="statut col">' + value.statut + '</div>' + '<div class="pdf col">' + "<a href=" +"{{ path('afficherCommande',{'id':"value.id"}) }}>" + " PDF " + '</a>' + '</div>' + '</div>' #}
+{# $(".id").append(value.id)
+						$(".com").append(value.nomCommande)
+						$(".date").append(value.date)
+						$(".client").append(value.client.nom)
+						$(".ope").append(value.operation.type_operation)
+						$(".statut").append(value.statut)
+						/////AFFICHAGE REPONSE///// 
+						'<div class=" row" style="margin-top:3%">'
+											'<div class="id col">'++'</div>'
+											'<div class="com col">'++'</div>'
+											'<div class="date col">'++'</div>'
+											'<div class="client col">'++'</div>'
+											'<div class="ope col">'++'</div>'
+											'<div class="statut col">'++'</div>'
+										'</div>'
+						<a href="{{path('afficherCommande',{'id':commandes.id})}}" style="color:#3D6A9E" class="boutton">PDF</a>
+						
+						'<a #}

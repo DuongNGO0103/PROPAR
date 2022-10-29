@@ -110,6 +110,17 @@ class CommandeRepository extends ServiceEntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
+    public function searchBar($id): array
+    {
+        return $this->createQueryBuilder('m')
+            ->where("m.user = ?2")
+            ->setParameter(2, $id)
+            ->orderBy('m.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+        // ->setMaxResults(10)
+
+    }
     //    public function findOneBySomeField($value): ?Commande
     //    {
     //        return $this->createQueryBuilder('c')

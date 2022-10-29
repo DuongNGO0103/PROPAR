@@ -16,19 +16,12 @@ class CallAjaxController extends AbstractController
      */
     public function index(CommandeRepository $repository, NormalizerInterface $normalizer): JsonResponse
     {
-        $commandeProfil = $repository->findBy(
-            array('user' =>  $this->getUser()),
-            array('date' => 'desc'),
-            null,
-            null
+        $commandeProfil = $repository->searchBar($this->getUser());
+        $result = $normalizer->normalize($commandeProfil, 'json', ['groups' => 'show_product']);
+        return $this->json(
+            $result,
+            200,
+            ['Content-Type', 'application/json']
         );
-        $commandes = $normalizer->normalize($commandeProfil, 'json', ['groups' => 'show_product']);
-        $response = new JsonResponse();
-        $response->setData($commandes);
-
-        $response->headers->set('Content-Type', 'application/json');
-        $response->headers->set("Access-Control-Allow-Origin", "*");
-
-        return $response;
     }
 }
