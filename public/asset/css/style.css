@@ -1,3 +1,8 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,800);
+
+*{
+  font: 300 1em/1.5 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+}
 body {
     width: 100%;
     height: 100vh;
@@ -8,35 +13,376 @@ body {
     background-color: #3D6A9E;
 }
 #main {
-    background-color: #ecf4ec;
+    background-color: #e7e7e7;
     height: 100vh;
-
+    position: static;
 }
 #navbartop {
     background-color:#3D6A9E;
     height:10%;
     width: 100%;
-    
 }
 .logo {
   width: 100%;
-  padding: 10%;
-    
+  padding: 10%; 
 }
 .listLateral  {
     color: white;
-    margin-top: 30%;
-    margin-left: 10%;
-
+    list-style: none;
 }
-.listLateral a {
+.listLateral a  {
+    text-decoration: none;
     color: white;
-    
-
 }
 #peremain2 {
   height: 90%;
   overflow: auto;
-  
+  background-color: #e7e7e7;
+}
+.cadre{
+    position: absolute;
+    width: 65%;
+    left: 21%;
+    top: 14%;
+    height: 82%;
+    /* background: rgb(255, 255, 255); */
+    background: #cdd0d4;
+    margin-left: 10%;
+    padding-top: 2%;
+    border-radius: 15px;
+
+}
+.cadreB{
+    position: absolute;
+    width: 65%;
+    left: 21%;
+    height: 82%;
+    background: #e7e7e7;
+    margin-left: 10%;
+    padding-top: 1%;
+    border-radius: 15px;
+
+}
+.cadreLogin{
+    position: absolute;
+    padding: 4%;
+    width: 50%;
+    left: 28%;
+    top: 20%;
+    height: 70%;
+    background: rgb(220, 220, 220);
+    margin-left: 10%;
+    border-radius: 15px;
+}
+.cadreAccueil1{
+    position: absolute;
+    width: 33%;
+    left: 18%;
+    height: 70%;
+    background: rgb(220, 220, 220);
+    margin-left: 10%;
+    border-radius: 15px;
+    overflow-y: scroll;
+    margin-top: 6rem;
+}
+.cadreAcceuil2{
+    position: absolute;
+    width: 33%;
+    left: 54%;
+    height: 70%;
+    background: rgb(220, 220, 220);
+    margin-left: 10%;
+    border-radius: 15px;
+    overflow-y: scroll;
+    margin-top: 6rem;
+}
+h3{
+text-align: center;
+font-size: 270%;
+color: white;
+margin-bottom: 2%;
+}
+h2{
+text-align: center;
+color: #3D6A9E;
+} 
+
+h1{
+text-align: center;
+color:#3D6A9E;
+} 
+.cadreRow{
+margin-bottom: 4%;
+background: #527cad;
+border-radius: 8px;
+margin-left: 0.001%;
+margin-right: 0.001%;
+}
+.scroll{
+overflow-y: scroll;
+position:absolute;
+height:65%;
+width: 96%;
+}
+.test{
+    margin-top: 1%;
+    margin-bottom: 1%;
+    color: whitesmoke;
 }
 
+.parent {
+background: #3D6A9E;
+border-radius: 10px;
+margin-bottom: 2%;
+padding: 2%;
+color:white;
+font-size: 10px;
+display: grid;
+grid-template-columns: repeat(5, 1fr);
+grid-column-gap: 0px;
+grid-row-gap: 0px;
+}
+input.searchBar.form-control{
+    margin: auto;
+    width: 30%;
+    margin-bottom: 1%;
+}
+p.titreCommande{
+color: #3D6A9E;
+}
+a{
+  text-decoration: none;
+}
+a.boutton{
+    background-color:#CBC6C5;
+    border-radius: 10%;
+    text-decoration: none;
+    padding: 3%;
+    color: white;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+/* ////////////PARTI ACCUEIL////////// */
+.parentAcc {
+    background: #3D6A9E;
+    border-radius: 10px;
+    margin-bottom: 8%;
+    padding: 6%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    }
+    
+    .div1A { grid-area: 1 / 1 / 2 / 2;
+    min-height: 3rem; }
+    .div2A { grid-area: 1 / 2 / 2 / 3; }
+    .div3A { grid-area: 1 / 3 / 2 / 4; }
+    .div4A { grid-area: 1 / 4 / 2 / 5; }
+    .div5A { grid-area: 1 / 5 / 2 / 6; }
+    /* ///////////BOUTON PERSONALISER HOVER/////////// */
+
+li{
+border-radius: 4px;
+background-color: #5ca1e1;
+text-align: center;
+width: 100%;
+margin-left: 36px;
+margin-bottom: 40px;
+box-shadow: 0 10px 20px -8px rgba(0, 0, 0,.7);
+}
+          
+li{
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+li:hover{
+  padding-right: 24px;
+  padding-left:8px;
+}
+
+/* /////////////// Menu Ca////////////// */
+.highcharts-menu-item{
+width: 40%;
+height:20%;
+box-shadow: none;
+margin-left: 4%;
+text-align: center;
+margin-bottom: 1%;
+cursor: none;
+
+}
+.highcharts-contextmenu{
+width: 30%;
+}
+
+/* ///////////////accueil//////////// */
+:root{
+    --blackApp: #000000;
+    --blueApp:#3d6a9e;
+    --text-titles-petite: 1rem;
+    --size-texte-moyen: 1.25rem;
+    --size-texte-grande: 1.50rem;
+    --size-texte-bg: 1.75rem;  
+    --font-weight-500:500; 
+  }
+          
+        #rowMain2General1 {
+            height: 100%;
+        }
+  
+      #colMain2General-up.col {
+        background-color:#e7e7e7;
+      }
+      #colMain2General-up {
+        height: 40vh;
+     }
+   
+    #colMain2General-down {
+      margin-top: 2%;
+      height: 40vh;
+   }
+
+      .ContainerTableauList {
+        background-color: var(--blueApp);
+        height: 12%;
+      }
+       
+      #ContenueTable {
+        background: #cdd0d4;
+        height: 73%;
+        overflow-y: scroll;
+      } 
+
+      .ele_T1{
+        width:5%;
+      }
+      .ele_T2{
+        width:20%;
+      }
+      .ele_T3{
+        width:10%;
+      }
+      .ele_T4{
+        width:15%;
+      }
+      .ele_T5{
+        width:20%;
+      }
+      .ele_T6{
+        width:15%;
+      }
+      .ele_T7{
+        width:15%;
+      }
+      .ele_1{
+        width:5%;
+        font-weight: var(--font-weight-500);
+      }
+      .ele_2{
+        width:20%;
+        font-weight: var(--font-weight-500);
+      }
+      .ele_3{
+        width:10%;
+        font-weight: var(--font-weight-500);
+      }
+      .ele_4{
+        width:15%;
+        font-weight: var(--font-weight-500);
+      }
+      .ele_5{
+        width:20%;
+        font-weight: var(--font-weight-500);
+      }
+      .ele_6{
+        width:15%;
+        font-weight: var(--font-weight-500);
+      }
+      .ele_7{
+        width:15%;
+        font-weight: var(--font-weight-500);
+      }
+/* 
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil
+{% endblock %}
+
+{% block main2 %}
+	<div class="col-6">
+		<table class="table">
+			<h1>Opérations en cours</h1>
+			<thead>
+				<tr>
+					<th scope="col">Commande</th>
+					<th scope="col">Date</th>
+					<th scope="col">Client</th>
+					<th scope="col">Operation</th>
+					<th scope="col">Employé</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+	<div class="cadreAccueil1 col-6">
+		{% for commandes in commandeEnCours %}
+			<div class="parentAcc">
+				<div class="div1A">
+					{{commandes.nomCommande}}
+				</div>
+				<div class="div2A">
+					{{ commandes.date|date("d/m/Y") }}
+				</div>
+				<div class="div3A">
+					{{commandes.client.nom}}
+				</div>
+				<div class="div4A">
+					{{commandes.operation.typeoperation}}
+				</div>
+				<div class="div5A">
+					{{commandes.user.nom|default('')}}
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+	<div class="col-6">
+		<table class="table">
+			<h1>Opérations Terminées</h1>
+			<thead>
+				<tr>
+					<th scope="col">Commande</th>
+					<th scope="col">Date</th>
+					<th scope="col">Client</th>
+					<th scope="col">Operation</th>
+					<th scope="col">Employé</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+	<div class="cadreAcceuil2 col-6">
+		{% for commandes in commandeTermine %}
+			<div class="parentAcc">
+				<div class="div1A">
+					{{commandes.nomCommande}}
+				</div>
+				<div class="div2A">
+					{{ commandes.date|date("d/m/Y") }}
+				</div>
+				<div class="div3A">
+					{{commandes.client.nom}}
+				</div>
+				<div class="div4A">
+					{{commandes.operation.typeoperation}}
+				</div>
+				<div class="div5A">
+					{{commandes.user.nom|default('')}}
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %} */

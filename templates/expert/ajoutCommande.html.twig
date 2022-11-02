@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une commande
+{% endblock %}
+
+
+{% block navbarlists %}
+	<li class="listeLateral">
+		<a href="{{ path('app_expert') }}">Tableau de bord</a>
+	</li>
+	<li class="listeLateral">
+		<a href="{{ path('app_expert_operations') }}">Ajouter une opération</a>
+	</li>
+	<li class="listeLateral">
+		<a href="{{ path('app_liste_operations') }}">Lister mes opérations</a>
+	</li>
+	<li class="listeLateral">
+		<a href="{{ path('liste_employe') }}">Liste des employés</a>
+	</li>
+	<li class="listeLateral">
+		<a href="{{ path('inscription') }}">Ajouter un employé</a>
+	</li>
+	<li class="listeLateral">
+		<a href="{{ path('liste_employe_modifier') }}">Modifier un employé</a>
+	</li>
+	<li class="listeLateral">
+		<a href="{{ path('app_prise_commande_expert') }}">Ajouter commande client</a>
+	</li>
+	<li class="listeLateral">
+		<a href="{{ path('app_chiffre_affaire') }}">Chiffre d'affaire</a>
+	</li>
+
+
+{% endblock %}
+
+{% block main2 %}
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success">
+			{{message}}
+		</div>
+	{% endfor %}
+	<h3>Ajouter une commande</h3>
+	{{ form_start(RegistrationCommandeType) }}
+	<a class="btn" style="background-color:#CBC6C5; margin-bottom:2%; margin-left:85%;color:#3D6A9E" href="{{ path('app_registration_client_expert') }}">Ajouter client</a>
+	{{ form_row(RegistrationCommandeType.nomCommande)}}
+	{{ form_row(RegistrationCommandeType.date)}}
+	{{ form_row(RegistrationCommandeType.client)}}
+	{{ form_row(RegistrationCommandeType.operation)}}
+	<input type="submit" class="btn" style="background-color:#CBC6C5; margin-bottom:5%;color:#3D6A9E" value="Enregistrer">
+	{{ form_end(RegistrationCommandeType) }}
+
+{% endblock %}

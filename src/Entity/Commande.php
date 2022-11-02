@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CommandeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CommandeRepository::class)
@@ -14,37 +15,63 @@ class Commande
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"show_product"})
      */
     private $id;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="string", length=255)
+     * @Groups({"show_product"})
+     */
+    private $nomCommande;
+
+    /**
+     * @ORM\Column(type="date")
+     * @Groups({"show_product"})
      */
     private $date;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
+     * @Groups({"show_product"})
      */
-    private $Statut;
+    private $statut;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="commande")
+     * @ORM\JoinColumn(nullable=false)
+     * @Groups({"show_product"})
      */
-    private $facture;
+    private $client;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Operation::class, inversedBy="commandes")
+     * @ORM\ManyToOne(targetEntity=Operation::class, inversedBy="commande")
+     * @ORM\JoinColumn(nullable=false)
+     * @Groups({"show_product"})
      */
     private $operation;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="commandes")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="commande")
+     * @Groups({"show_product"})
      */
-    private $client;
+    private $user;
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getNomCommande(): ?string
+    {
+        return $this->nomCommande;
+    }
+
+    public function setNomCommande(string $nomCommande): self
+    {
+        $this->nomCommande = $nomCommande;
+
+        return $this;
     }
 
     public function getDate(): ?\DateTimeInterface
@@ -52,7 +79,7 @@ class Commande
         return $this->date;
     }
 
-    public function setDate(?\DateTimeInterface $date): self
+    public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
 
@@ -61,24 +88,24 @@ class Commande
 
     public function getStatut(): ?string
     {
-        return $this->Statut;
+        return $this->statut;
     }
 
-    public function setStatut(?string $Statut): self
+    public function setStatut(string $statut): self
     {
-        $this->Statut = $Statut;
+        $this->statut = $statut;
 
         return $this;
     }
 
-    public function getFacture(): ?string
+    public function getClient(): ?Client
     {
-        return $this->facture;
+        return $this->client;
     }
 
-    public function setFacture(?string $facture): self
+    public function setClient(?Client $client): self
     {
-        $this->facture = $facture;
+        $this->client = $client;
 
         return $this;
     }
@@ -95,14 +122,14 @@ class Commande
         return $this;
     }
 
-    public function getClient(): ?Client
+    public function getUser(): ?User
     {
-        return $this->client;
+        return $this->user;
     }
 
-    public function setClient(?Client $client): self
+    public function setUser(?User $user): self
     {
-        $this->client = $client;
+        $this->user = $user;
 
         return $this;
     }

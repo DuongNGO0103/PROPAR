@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des employés
+{% endblock %}
+
+{% block navbarlists %}
+	<li class="listeLateral">
+		<a href="{{ path('app_expert') }}">Tableau de bord</a>
+	</li>
+	<li class="listeLateral">
+		<a href="{{ path('app_expert_operations') }}">Ajouter une opération</a>
+	</li>
+	<li class="listeLateral">
+		<a href="{{ path('app_liste_operations') }}">Lister mes opérations</a>
+	</li>
+	<li class="listeLateral">
+		<a href="{{ path('liste_employe') }}">Liste des employés</a>
+	</li>
+	<li class="listeLateral">
+		<a href="{{ path('inscription') }}">Ajouter un employé</a>
+	</li>
+	<li class="listeLateral">
+		<a href="{{ path('liste_employe_modifier') }}">Modifier un employé</a>
+	</li>
+	<li class="listeLateral">
+		<a href="{{ path('app_prise_commande_expert') }}">Ajouter commande client</a>
+	</li>
+	<li class="listeLateral">
+		<a href="{{ path('app_chiffre_affaire') }}">Chiffre d'affaire</a>
+	</li>
+
+{% endblock %}
+{% block main2 %}
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success">
+			{{message}}
+		</div>
+	{% endfor %}
+	<h3>Liste des employés</h3>
+	<table class="table">
+		<thead>
+			<tr style="color:#3D6A9E">
+				<th scope="col">ID</th>
+				<th scope="col">NOM</th>
+				<th scope="col">PRENOM</th>
+				<th scope="col">EMAIL</th>
+				<th scope="col">ROLE</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for employe in employe %}
+				<tr>
+					<th scope="row">{{ employe.id }}</th>
+					<td>{{ employe.nom }}</td>
+					<td>{{ employe.prenom }}</td>
+					<td>{{ employe.email }}</td>
+					<td>{{ employe.roles[0] }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</tbody>
+</table>{% endblock %}

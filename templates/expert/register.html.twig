@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un employé
+{% endblock %}
+
+{% block navbarlists %}
+	<li class="listeLateral">
+		<a href="{{ path('app_expert') }}">Tableau de bord</a>
+	</li>
+	<li class="listeLateral">
+		<a href="{{ path('app_expert_operations') }}">Ajouter une opération</a>
+	</li>
+	<li class="listeLateral">
+		<a href="{{ path('app_liste_operations') }}">Lister mes opérations</a>
+	</li>
+	<li class="listeLateral">
+		<a href="{{ path('liste_employe') }}">Liste des employés</a>
+	</li>
+	<li class="listeLateral">
+		<a href="{{ path('inscription') }}">Ajouter un employé</a>
+	</li>
+	<li class="listeLateral">
+		<a href="{{ path('liste_employe_modifier') }}">Modifier un employé</a>
+	</li>
+	<li class="listeLateral">
+		<a href="{{ path('app_prise_commande_expert') }}">Ajouter commande client</a>
+	</li>
+	<li class="listeLateral">
+		<a href="{{ path('app_chiffre_affaire') }}">Chiffre d'affaire</a>
+	</li>
+
+{% endblock %}
+
+{% block main2 %}
+	<div class='cadreRegister'>
+		{% for message in app.flashes('ajoutEmploye') %}
+			<div class="alert alert-success">
+				{{message}}
+			</div>
+		{% endfor %}
+		<h3>Ajouter un employé</h3>
+		{{ form_start(registrationForm) }}
+		{{ form_row(registrationForm.nom)}}
+		{{ form_row(registrationForm.prenom)}}
+		{{ form_row(registrationForm.email,{
+            "attr":{"placeholder":"Saisir votre email"},
+
+    })}}
+		{{ form_row(registrationForm.uuid,{
+            "label":"Pseudo"
+    })}}
+		{{ form_row(registrationForm.password, {
+            label: 'Password'
+        })}}
+		{{ form_row(registrationForm.roles)}}
+		{{ form_row(registrationForm.agreeTerms) }}
+		<button type="submit" class="btn btn-primary">Ajouter</button>
+		{{ form_end(registrationForm) }}
+	</div>
+
+{% endblock %}

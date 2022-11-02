@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Register
+{% endblock %}
+{% block monTitre %}Inscription sur le site
+{% endblock %}
+
+{% block navbarlists %}
+	<li class='mt-4'>
+		<a href="{{ path('app_apprenti') }}">Tableau de bord</a>
+	</li>
+	<li class='mt-4'>
+		<a href="{{ path('app_apprenti_operations') }}">Ajouter une opération</a>
+	</li>
+	<li class='mt-4'>
+		<a href="{{ path('app_liste_operations_apprenti') }}">Liste mes opérations</a>
+	</li>
+	<li class='mt-4'>
+		<a href="{{ path('app_prise_commande_apprenti') }}">Ajouter commande client</a>
+	</li>
+{% endblock %}
+{% block main2 %}
+
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success">
+			{{message}}
+		</div>
+	{% endfor %}
+	<h3>Ajouter une commande</h3>
+	{{ form_start(RegistrationCommandeType)}}
+	<a class="btn" style="background-color:#CBC6C5; margin-bottom:2%; margin-left:85%;color:#3D6A9E" href="{{ path('app_registration_client_apprenti') }}">Ajouter client</a>
+	{{ form_row(RegistrationCommandeType.nomCommande)}}
+	{{ form_row(RegistrationCommandeType.date)}}
+	{{ form_row(RegistrationCommandeType.client)}}
+	{{ form_row(RegistrationCommandeType.operation)}}
+	<input type="submit" class="btn" style="background-color:#CBC6C5; margin-bottom:5%;color:#3D6A9E" value="Enregistrer">
+	{{ form_end(RegistrationCommandeType)}}
+{% endblock %}
