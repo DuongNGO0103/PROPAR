@@ -1,20 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Dashboard
+{% block title %}Ajouter une opération
 {% endblock %}
 
 
 {% block navbarlists %}
-	<li class='mt-4'>
+	<li class='listeLateral'>
 		<a href="{{ path('app_senior') }}">Tableau de bord</a>
 	</li>
-	<li class='mt-4'>
+	<li class='listeLateral'>
 		<a href="{{ path('app_senior_operations') }}">Ajouter une opération</a>
 	</li>
-	<li class='mt-4'>
+	<li class='listeLateral'>
 		<a href="{{ path('app_liste_operations_senior') }}">Lister mes opérations</a>
 	</li>
-	<li class='mt-4'>
+	<li class='listeLateral'>
 		<a href="{{ path('app_prise_commande') }}">Ajouter commande client</a>
 	</li>
 {% endblock %}
@@ -23,6 +23,12 @@
 	<div class="cadre">
 		{% for message in app.flashes('wrong') %}
 			<div class="alert alert-danger">
+				{{message}}
+			</div>
+
+		{% endfor %}
+		{% for message in app.flashes('successs') %}
+			<div class="alert alert-success">
 				{{message}}
 			</div>
 		{% endfor %}

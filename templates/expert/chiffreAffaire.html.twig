@@ -6,7 +6,6 @@
 	<style>
 		#container {
 			height: 550px;
-
 		}
 
 		.highcharts-figure,
@@ -16,7 +15,6 @@
 			margin: 1em auto;
 
 		}
-
 		.highcharts-data-table table {
 			font-family: Verdana, sans-serif;
 			border-collapse: collapse;
@@ -40,7 +38,9 @@
 			padding: 0.5em;
 
 		}
-
+		.highcharts-credits {
+			display: none !important;
+		}
 		.highcharts-data-table td,
 		.highcharts-data-table th,
 		.highcharts-data-table caption {
@@ -59,30 +59,31 @@
 	</style>
 {% endblock %}
 {% block navbarlists %}
-	<li>
+	<li class="listeLateral">
 		<a href="{{ path('app_expert') }}">Tableau de bord</a>
 	</li>
-	<li>
+	<li class="listeLateral">
 		<a href="{{ path('app_expert_operations') }}">Ajouter une opération</a>
 	</li>
-	<li>
+	<li class="listeLateral">
 		<a href="{{ path('app_liste_operations') }}">Lister mes opérations</a>
 	</li>
-	<li>
+	<li class="listeLateral">
 		<a href="{{ path('liste_employe') }}">Liste des employés</a>
 	</li>
-	<li>
+	<li class="listeLateral">
 		<a href="{{ path('inscription') }}">Ajouter un employé</a>
 	</li>
-	<li>
+	<li class="listeLateral">
 		<a href="{{ path('liste_employe_modifier') }}">Modifier un employé</a>
 	</li>
-	<li>
+	<li class="listeLateral">
 		<a href="{{ path('app_prise_commande_expert') }}">Ajouter commande client</a>
 	</li>
-	<li>
+	<li class="listeLateral">
 		<a href="{{ path('app_chiffre_affaire') }}">Chiffre d'affaire</a>
 	</li>
+
 
 {% endblock %}
 
@@ -105,6 +106,7 @@
 		Highcharts.chart('container', {
 chart: {
 type: 'pie',
+backgroundColor: '#e7e7e7',
 options3d: {
 enabled: true,
 alpha: 45
@@ -113,6 +115,7 @@ alpha: 45
 title: {
 text: ""
 },
+
 
 plotOptions: {
 pie: {

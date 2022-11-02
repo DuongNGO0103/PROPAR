@@ -5,30 +5,31 @@
 
 
 {% block navbarlists %}
-	<li>
+	<li class="listeLateral">
 		<a href="{{ path('app_expert') }}">Tableau de bord</a>
 	</li>
-	<li>
+	<li class="listeLateral">
 		<a href="{{ path('app_expert_operations') }}">Ajouter une opération</a>
 	</li>
-	<li>
+	<li class="listeLateral">
 		<a href="{{ path('app_liste_operations') }}">Lister mes opérations</a>
 	</li>
-	<li>
+	<li class="listeLateral">
 		<a href="{{ path('liste_employe') }}">Liste des employés</a>
 	</li>
-	<li>
+	<li class="listeLateral">
 		<a href="{{ path('inscription') }}">Ajouter un employé</a>
 	</li>
-	<li>
+	<li class="listeLateral">
 		<a href="{{ path('liste_employe_modifier') }}">Modifier un employé</a>
 	</li>
-	<li>
+	<li class="listeLateral">
 		<a href="{{ path('app_prise_commande_expert') }}">Ajouter commande client</a>
 	</li>
-	<li>
+	<li class="listeLateral">
 		<a href="{{ path('app_chiffre_affaire') }}">Chiffre d'affaire</a>
 	</li>
+
 
 {% endblock %}
 
@@ -48,14 +49,4 @@
 	<input type="submit" class="btn" style="background-color:#CBC6C5; margin-bottom:5%;color:#3D6A9E" value="Enregistrer">
 	{{ form_end(RegistrationCommandeType) }}
 
-	{# <script>
-													
-													const alerts = document.querySelectorAll('[class*="alert alert-success"]')
-													for (const alert of alerts) {
-													    setTimeout( function() {
-													        const bootstrapAlert = bootstrap.Alert.getOrCreateInstance(alert);
-													        bootstrapAlert.close();
-													    }, 200);
-													}
-															</script> #}
 {% endblock %}

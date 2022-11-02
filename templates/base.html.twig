@@ -51,6 +51,10 @@
 						</div>
 					</div>
 				</div>
-				{% block javascripts %}{% endblock %}
+				{% block javascripts %}
+					<script>
+						$('.alert.alert').fadeIn().delay(4000).fadeOut();
+					</script>
+				{% endblock %}
 			</body>
 		</html>

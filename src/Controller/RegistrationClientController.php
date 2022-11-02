@@ -26,7 +26,7 @@ class RegistrationClientController extends AbstractController
             // encode the plain password
             $entityManager->persist($client);
             $entityManager->flush();
-            $this->addFlash("success", "La Client a bien été ajouté");
+            $this->addFlash("success", "Le client a bien été ajouté");
             // do anything else you need here, like send an email
 
             return $this->redirectToRoute('app_prise_commande_expert');
@@ -49,7 +49,7 @@ class RegistrationClientController extends AbstractController
             // encode the plain password
             $entityManager->persist($client);
             $entityManager->flush();
-            $this->addFlash("success", "La Client a bien été ajouté");
+            $this->addFlash("success", "Le client a bien été ajouté");
             // do anything else you need here, like send an email
 
             return $this->redirectToRoute('app_prise_commande');
@@ -73,7 +73,7 @@ class RegistrationClientController extends AbstractController
             // encode the plain password
             $entityManager->persist($client);
             $entityManager->flush();
-            $this->addFlash("success", "La Client a bien été ajouté");
+            $this->addFlash("success", "Le client a bien été ajouté");
             // do anything else you need here, like send an email
 
             return $this->redirectToRoute('app_prise_commande_apprenti');

@@ -1,20 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Dashboard
+{% block title %}Lister mes opérations
 {% endblock %}
 
 
 {% block navbarlists %}
-	<li class='mt-4'>
+	<li class='listeLateral'>
 		<a href="{{ path('app_senior') }}">Tableau de bord</a>
 	</li>
-	<li class='mt-4'>
+	<li class='listeLateral'>
 		<a href="{{ path('app_senior_operations') }}">Ajouter une opération</a>
 	</li>
-	<li class='mt-4'>
+	<li class='listeLateral'>
 		<a href="{{ path('app_liste_operations_senior') }}">Lister mes opérations</a>
 	</li>
-	<li class='mt-4'>
+	<li class='listeLateral'>
 		<a href="{{ path('app_prise_commande') }}">Ajouter commande client</a>
 	</li>
 {% endblock %}
@@ -22,6 +22,7 @@
 {% block main2 %}
 	<div class="cadre">
 		<h3>Lister mes opérations</h3>
+		<input id='adresse' type="text" placeholder="Recherche par id ou client" class="searchBar form-control">
 		<div class="container text-center">
 			<div class="row">
 				<div class="col">
@@ -46,6 +47,7 @@
 				<hr>
 			</div>
 			<div class="scroll">
+				<p class="resultat row"></p>
 				{% for commandes in commandeProfil %}
 					<div class="cadreRow row">
 						<div class="test col">
@@ -69,11 +71,46 @@
 						<div class="test col">
 							{% if commandes.statut == "Terminer" %}
 								<a href="{{path('afficherCommande',{'id':commandes.id})}}" style="color:#3D6A9E" class="boutton">PDF</a>
-								{# <button type="submit" class="btn btn-primary">Modifier</button> #}
 							{% endif %}
 						</div>
 					</div>
 				{% endfor %}
 			</div>
+			<script>
+
+				$(document).ready(function () {
+$("#adresse").keyup(function (e) {
+e.preventDefault();
+e.stopPropagation();
+
+let input = $("#adresse").val();
+if (input.length === 0) {
+$('.resultat').empty();
+return false;
+}
+
+$.ajax({
+url: "https://localhost:8000/call/ajax/operationsListe",
+type: 'GET',
+
+success: function (response) {
+
+let liste = "";
+let listeError = "";
+$.each(response, function (index, value) { // J'ajoute chaque élément dans une liste
+if (input == value.client.nom.toLowerCase() || input == value.id) {
+liste += '<div class=" row" style="margin-top:3%;padding:10px">' + '<div class="id col">' + value.id + '</div>' + '<div class="com col">' + value.nomCommande + '</div>' + '<div class="date col">' + new Date(value.date).toLocaleDateString() + '</div>' + '<div class="client col">' + value.client.nom + '</div>' + '<div class="ope col">' + value.operation.type_operation + '</div>' + '<div class="statut col">' + value.statut + '</div>' + '<div class="pdf col">' + "<a href=https://localhost:8000/pdf/" + value.id + " style='color:#3D6A9E' class='boutton'>" + " PDF " + '</a>' + '</div>' + '</div>'
+}
+});
+$('.resultat').html(liste);
+},
+
+error: function (response) {
+console.log(error)
+}
+});
+});
+});
+			</script>
 		</div>
 	{% endblock %}

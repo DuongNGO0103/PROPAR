@@ -4,28 +4,28 @@
 {% endblock %}
 
 {% block navbarlists %}
-	<li>
+	<li class="listeLateral">
 		<a href="{{ path('app_expert') }}">Tableau de bord</a>
 	</li>
-	<li>
+	<li class="listeLateral">
 		<a href="{{ path('app_expert_operations') }}">Ajouter une opération</a>
 	</li>
-	<li>
+	<li class="listeLateral">
 		<a href="{{ path('app_liste_operations') }}">Lister mes opérations</a>
 	</li>
-	<li>
+	<li class="listeLateral">
 		<a href="{{ path('liste_employe') }}">Liste des employés</a>
 	</li>
-	<li>
+	<li class="listeLateral">
 		<a href="{{ path('inscription') }}">Ajouter un employé</a>
 	</li>
-	<li>
+	<li class="listeLateral">
 		<a href="{{ path('liste_employe_modifier') }}">Modifier un employé</a>
 	</li>
-	<li>
+	<li class="listeLateral">
 		<a href="{{ path('app_prise_commande_expert') }}">Ajouter commande client</a>
 	</li>
-	<li>
+	<li class="listeLateral">
 		<a href="{{ path('app_chiffre_affaire') }}">Chiffre d'affaire</a>
 	</li>
 
@@ -35,6 +35,11 @@
 
 	{% for message in app.flashes('wrong') %}
 		<div class="alert alert-danger">
+			{{message}}
+		</div>
+	{% endfor %}
+	{% for message in app.flashes('successs') %}
+		<div class="alert alert-success">
 			{{message}}
 		</div>
 	{% endfor %}

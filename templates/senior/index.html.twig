@@ -1,21 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Dashboard
+{% block title %}Tableau de bord
 {% endblock %}
 
 
 {% block navbarlists %}
-
-	<li class='btn-hover color-1 mt-4'>
+	<li class='listeLateral'>
 		<a href="{{ path('app_senior') }}">Tableau de bord</a>
 	</li>
-	<li class='btn-hover mt-4'>
+	<li class='listeLateral'>
 		<a href="{{ path('app_senior_operations') }}">Ajouter une opération</a>
 	</li>
-	<li class='btn-hover mt-4'>
+	<li class='listeLateral'>
 		<a href="{{ path('app_liste_operations_senior') }}">Lister mes opérations</a>
 	</li>
-	<li class='btn-hover mt-4'>
+	<li class='listeLateral'>
 		<a href="{{ path('app_prise_commande') }}">Ajouter commande client</a>
 	</li>
 {% endblock %}

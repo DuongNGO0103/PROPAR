@@ -29,20 +29,20 @@
 			{{message}}
 		</div>
 	{% endfor %}
-	<div class="cadre">
-		<h3>Ajouter un client</h3>
-		{{ form_start(RegistrationClientType) }}
-		{{ form_row(RegistrationClientType.nom)}}
-		{{ form_row(RegistrationClientType.prenom)}}
-		{{ form_row(RegistrationClientType.nomSociete)}}
-		{{ form_row(RegistrationClientType.email)}}
-		{{ form_row(RegistrationClientType.adresse)}}
-		<div class="address-feedback position-absolute list-group" style="z-index:1100;"></div>
-		<input type="submit" class="btn" style="background-color:#CBC6C5; margin-bottom:5%; color:white" value="Enregistrer">
+
+	<h3>Ajouter un client</h3>
+	{{ form_start(RegistrationClientType) }}
+	{{ form_row(RegistrationClientType.nom)}}
+	{{ form_row(RegistrationClientType.prenom)}}
+	{{ form_row(RegistrationClientType.nomSociete)}}
+	{{ form_row(RegistrationClientType.email)}}
+	{{ form_row(RegistrationClientType.adresse)}}
+	<div class="address-feedback position-absolute list-group" style="z-index:1100;"></div>
+	<input type="submit" class="btn" style="background-color:#CBC6C5; margin-bottom:5%;color:#3D6A9E" value="Enregistrer">
 
 
-		<script>
-			var currentFocus = -1;
+	<script>
+		var currentFocus = -1;
 var fetchTrigger = 0;
 
 function setActive() {
@@ -135,8 +135,7 @@ if ($("div.address-feedback a").length > 0 && (e.keyCode === 38 || e.keyCode ===
 e.preventDefault();
 }
 });
-		</script>
+	</script>
 
-		{{ form_end(RegistrationClientType) }}
-	</div>
+	{{ form_end(RegistrationClientType) }}
 {% endblock %}
