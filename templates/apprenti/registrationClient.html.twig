@@ -117,7 +117,7 @@ autocomplete: 1
 let liste = "";
 $.each(data.features, function (i, obj) { // J'ajoute chaque élément dans une liste
 let cooladdress = obj.properties.name + " " + obj.properties.postcode + " <strong>" + obj.properties.city + "</strong>";
-liste += '<a class="list-group-item list-group-item-action py-1" style="width:57rem" href="#" name="' + obj.properties.label + '" data-name="' + obj.properties.name + ' ' + obj.properties.postcode + ' ' + obj.properties.city + '">' + cooladdress + '</a>';
+liste += '<a class="list-group-item list-group-item-action py-1" href="#" name="' + obj.properties.label + '" data-name="' + obj.properties.name + ' ' + obj.properties.postcode + ' ' + obj.properties.city + '">' + cooladdress + '</a>';
 });
 $('.address-feedback').html(liste);
 }, 'json');

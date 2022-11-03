@@ -31,32 +31,37 @@
 
 {% endblock %}
 {% block main2 %}
-	{% for message in app.flashes('success') %}
-		<div class="alert alert-success">
-			{{message}}
+	<div class="cadreB">
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success">
+				{{message}}
+			</div>
+		{% endfor %}
+		<h3>Liste des employés</h3>
+		<div class="scroll" style="height:80%">
+			<table class="table">
+				<thead>
+					<tr style="color:#3D6A9E">
+						<th scope="col">ID</th>
+						<th scope="col">NOM</th>
+						<th scope="col">PRENOM</th>
+						<th scope="col">EMAIL</th>
+						<th scope="col">ROLE</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					{% for employe in employe %}
+						<tr>
+							<th scope="row">{{ employe.id }}</th>
+							<td>{{ employe.nom }}</td>
+							<td>{{ employe.prenom }}</td>
+							<td>{{ employe.email }}</td>
+							<td>{{ employe.roles[0] }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
 		</div>
-	{% endfor %}
-	<h3>Liste des employés</h3>
-	<table class="table">
-		<thead>
-			<tr style="color:#3D6A9E">
-				<th scope="col">ID</th>
-				<th scope="col">NOM</th>
-				<th scope="col">PRENOM</th>
-				<th scope="col">EMAIL</th>
-				<th scope="col">ROLE</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for employe in employe %}
-				<tr>
-					<th scope="row">{{ employe.id }}</th>
-					<td>{{ employe.nom }}</td>
-					<td>{{ employe.prenom }}</td>
-					<td>{{ employe.email }}</td>
-					<td>{{ employe.roles[0] }}</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</tbody>
-</table>{% endblock %}
+	</div>
+{% endblock %}
