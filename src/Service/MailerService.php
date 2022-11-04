@@ -32,7 +32,7 @@ class MailerService
             Propar vous remercie pour votre confiance !</p>")
             //renseignez votre chemin ou ce situe le fichier facture.pdf dans le dossier public/pdf/...
             //   ->attachFromPath('Votre chemin ici !!');
-            ->attachFromPath('/Users/mohirmehhat/Workspace/PHP/PROPAR/public/pdf/facture.pdf');
+            ->attachFromPath('C:\Users\DeLL\Desktop\proparmohir\PROPAR\public\pdf\facture.pdf');
         $this->mailer->send($email);
     }
 }
