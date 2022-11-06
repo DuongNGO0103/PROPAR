@@ -32,7 +32,7 @@
 {% block main2 %}
 	<div class="cadreB">
 		<h3>Mes opérations</h3>
-		<input id='adresse' type="text" placeholder="Recherche par id ou client" class="searchBar form-control">
+		<input id='adresse' type="text" placeholder="Client ou id (en minuscule)" class="searchBar form-control">
 
 		<div class="container text-center">
 			<div class="row">
@@ -83,7 +83,6 @@
 						<div class="test col-2">
 							{% if commandes.statut == "Terminer" %}
 								<a href="{{path('afficherCommande',{'id':commandes.id})}}" style="color:#3D6A9E" class="boutton">PDF</a>
-								{# <button type="submit" class="btn btn-primary">Modifier</button> #}
 							{% endif %}
 						</div>
 					</div>
@@ -98,9 +97,8 @@ e.stopPropagation();
 
 let input = $("#adresse").val();
 
-
 $.ajax({
-url: "https://127.0.0.1:8000/call/ajax/operationsListe",
+url: "https://localhost:8000/call/ajax/operationsListe",
 type: 'GET',
 
 success: function (response) {
