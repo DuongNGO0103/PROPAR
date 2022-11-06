@@ -43,7 +43,7 @@ class EmployeController extends AbstractController
 
             $entityManager->remove($employe);
             $entityManager->flush();
-            return $this->redirectToRoute("liste_employe");
+            return $this->redirectToRoute("liste_employe_modifier");
         };
     }
 
@@ -63,7 +63,7 @@ class EmployeController extends AbstractController
             $entityManager->persist($employe);
             $entityManager->flush();
             $this->addFlash("success", "La modification a été efffectuée");
-            return $this->redirectToRoute("liste_employe");
+            return $this->redirectToRoute("liste_employe_modifier");
         }
         return $this->render('expert/employeModifierForm.html.twig', [
             "employe" => $employe,

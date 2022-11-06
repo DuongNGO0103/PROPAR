@@ -45,14 +45,8 @@
             "attr":{"placeholder":"Saisir votre email"},
 
     })}}
-				{{ form_row(registrationForm.uuid,{
-            "label":"Pseudo"
-    })}}
-				{{ form_row(registrationForm.password, {
-            label: 'Password'
-        })}}
+				{{ form_row(registrationForm.password)}}
 				{{ form_row(registrationForm.roles)}}
-				{{ form_row(registrationForm.agreeTerms) }}
 				<button type="submit" class="btn" style="background-color:#CBC6C5;color:#3D6A9E">Ajouter</button>
 				{{ form_end(registrationForm) }}
 			</div>
