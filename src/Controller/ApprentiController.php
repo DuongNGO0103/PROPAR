@@ -34,7 +34,7 @@ class ApprentiController extends AbstractController
         $commandeEnAttente = $repository->findBy(
             array('statut' => 'En attente'),
             array('date' => 'desc'),
-            null,
+            30,
             null
         );
         return $this->render('apprenti/operations.html.twig', [
@@ -50,7 +50,7 @@ class ApprentiController extends AbstractController
         $commandeProfil = $repository->findBy(
             array('user' =>  $this->getUser()),
             array('id' => 'desc'),
-            null,
+            10,
             null
         );
         return $this->render('apprenti/operationsListe.html.twig', [

@@ -11,16 +11,13 @@
 		<a href="{{ path('app_expert_operations') }}">Ajouter une opération</a>
 	</li>
 	<li class="listeLateral">
-		<a href="{{ path('app_liste_operations') }}">Lister mes opérations</a>
-	</li>
-	<li class="listeLateral">
-		<a href="{{ path('liste_employe') }}">Liste des employés</a>
+		<a href="{{ path('app_liste_operations') }}">Mes opérations</a>
 	</li>
 	<li class="listeLateral">
 		<a href="{{ path('inscription') }}">Ajouter un employé</a>
 	</li>
 	<li class="listeLateral">
-		<a href="{{ path('liste_employe_modifier') }}">Modifier un employé</a>
+		<a href="{{ path('liste_employe_modifier') }}">Liste des employés</a>
 	</li>
 	<li class="listeLateral">
 		<a href="{{ path('app_prise_commande_expert') }}">Ajouter commande client</a>
@@ -34,7 +31,7 @@
 
 {% block main2 %}
 	<div class="cadreB">
-		<h3>Lister mes opérations</h3>
+		<h3>Mes opérations</h3>
 		<input id='adresse' type="text" placeholder="Recherche par id ou client" class="searchBar form-control">
 
 		<div class="container text-center">
@@ -57,14 +54,14 @@
 				<div class="col">
 					<p class="titreCommande">STATUT</p>
 				</div>
-				<div class="col"></div>
+				<div class="col-2"></div>
 				<hr>
 			</div>
 			{# /////AFFICHAGE REPONSE///// #}
 			<div class="scroll">
 				<p class="resultat row"></p>
 				{% for commandes in commandeProfil %}
-					<div class="cadreRow row" style="margin-top:3%;">
+					<div class="cadreRow row" style="margin-top:2%;">
 						<div class="test col">
 							{{commandes.id}}
 						</div>
@@ -83,7 +80,7 @@
 						<div class="test col">
 							{{commandes.statut}}
 						</div>
-						<div class="test col">
+						<div class="test col-2">
 							{% if commandes.statut == "Terminer" %}
 								<a href="{{path('afficherCommande',{'id':commandes.id})}}" style="color:#3D6A9E" class="boutton">PDF</a>
 								{# <button type="submit" class="btn btn-primary">Modifier</button> #}

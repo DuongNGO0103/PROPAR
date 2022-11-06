@@ -82,7 +82,7 @@ class SeniorController extends AbstractController
         $commandeEnAttente = $repository->findBy(
             array('statut' => 'En attente'),
             array('date' => 'desc'),
-            null,
+            30,
             null
         );
         return $this->render('senior/operations.html.twig', [
@@ -98,7 +98,7 @@ class SeniorController extends AbstractController
         $commandeProfil = $repository->findBy(
             array('user' =>  $this->getUser()),
             array('id' => 'desc'),
-            null,
+            10,
             null
         );
         return $this->render('senior/operationsListe.html.twig', [
