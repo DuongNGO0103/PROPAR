@@ -26,12 +26,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"show_product"})
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="string", length=180)
-     */
-    private $uuid;
-
     /**
      * @ORM\Column(type="json")
      */

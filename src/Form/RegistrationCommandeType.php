@@ -21,17 +21,12 @@ class RegistrationCommandeType extends AbstractType
     {
         $builder
             ->add('nomCommande')
-            // ->add('date', DateType::class, array(
-            //     'widget' => 'single_text',
-            //     'format' => 'yyyy-MM-dd',
-            //     'data' => new DateTime(),
-            //     'attr' => array('class' => 'form-control', 'style' => 'line-height: 20px;')
-            // ))
             ->add('date', DateType::class, array(
-                'widget' => 'choice',
-                'years' => range(date('Y'), date('Y')),
-                'months' => range(date('m'), 12),
-                'days' => range(date('d'), 31),
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+                'data' => new DateTime(),
+                'attr' => array('class' => 'form-control', 'style' => 'line-height: 20px;'),
+                'attr' => ['readonly' => true]
             ))
             ->add('operation', EntityType::class, [
                 'class' => Operation::class,
