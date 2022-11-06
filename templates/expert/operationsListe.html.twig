@@ -97,13 +97,10 @@ e.preventDefault();
 e.stopPropagation();
 
 let input = $("#adresse").val();
-if (input.length === 0) {
-$('.resultat').empty();
-return false;
-}
+
 
 $.ajax({
-url: "https://localhost:8000/call/ajax/operationsListe",
+url: "https://127.0.0.1:8000/call/ajax/operationsListe",
 type: 'GET',
 
 success: function (response) {

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+
 use App\Repository\UserRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -55,8 +56,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\Regex(
-     *     pattern="/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/",
-     *     message="L'email est incorrect !"
+     *     pattern="/^([\w\.\-]+)@([\w\-]+)((\.(\w){2,4})+)$/",
+     *     message="Votre email est incorrect"
      * )
      */
     private $email;
