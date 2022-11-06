@@ -5,22 +5,22 @@
 
 
 {% block navbarlists %}
-	<li class='listeLateral'>
+	<li class='listeLateral mt-4'>
 		<a href="{{ path('app_senior') }}">Tableau de bord</a>
 	</li>
-	<li class='listeLateral'>
+	<li class='listeLateral mt-4'>
 		<a href="{{ path('app_senior_operations') }}">Ajouter une opération</a>
 	</li>
-	<li class='listeLateral'>
-		<a href="{{ path('app_liste_operations_senior') }}">Lister mes opérations</a>
+	<li class='listeLateral mt-4'>
+		<a href="{{ path('app_liste_operations_senior') }}">Mes opérations</a>
 	</li>
-	<li class='listeLateral'>
+	<li class='listeLateral mt-4'>
 		<a href="{{ path('app_prise_commande') }}">Ajouter commande client</a>
 	</li>
 {% endblock %}
 
 {% block main2 %}
-	<div class="cadre">
+	<div class="cadreB">
 		{% for message in app.flashes('wrong') %}
 			<div class="alert alert-danger">
 				{{message}}
@@ -53,31 +53,35 @@
 				<div class="col"></div>
 				<hr>
 			</div>
-			<div class="scroll">
-				{% for commandes in commandeEnAttente %}
-					<div class="cadreRow row">
-						<div class="test col">
-							{{commandes.id}}
-						</div>
-						<div class="test col">
-							{{commandes.nomCommande}}
-						</div>
-						<div class="test col">
-							{{ commandes.date|date("d/m/Y") }}
-						</div>
-						<div class="test col ">
-							{{commandes.client.nom}}
-						</div>
-						<div class="test col ">
-							{{commandes.operation.typeoperation}}
-						</div>
-						<div class="test col ">
-							<form method="post" action="{{path('senior_operations',{'id': commandes.id}) }}" onsubmit="return confirm('Voulez-vous vraiment Ajouter la commande ?');">
-								<input type="submit" class="btn" style="background-color:#CBC6C5; margin-bottom:6%;color:#3D6A9E " value="Ajouter">
-							</form>
-						</div>
+			<div class="container text-center">
+				<div class="row">
+					<div class="scroll" style="margin-top:2%">
+						{% for commandes in commandeEnAttente %}
+							<div class="cadreRow row">
+								<div class="test col">
+									{{commandes.id}}
+								</div>
+								<div class="test col">
+									{{commandes.nomCommande}}
+								</div>
+								<div class="test col">
+									{{ commandes.date|date("d/m/Y") }}
+								</div>
+								<div class="test col ">
+									{{commandes.client.nom}}
+								</div>
+								<div class="test col ">
+									{{commandes.operation.typeoperation}}
+								</div>
+								<div class="test col ">
+									<form method="post" action="{{path('senior_operations',{'id': commandes.id}) }}" onsubmit="return confirm('Voulez-vous vraiment Ajouter la commande ?');">
+										<input type="submit" class="btn" style="background-color:#CBC6C5; margin-bottom:6%;color:#3D6A9E " value="Ajouter">
+									</form>
+								</div>
+							</div>
+						{% endfor %}
 					</div>
-				{% endfor %}
+				</div>
 			</div>
 		</div>
 	</div>

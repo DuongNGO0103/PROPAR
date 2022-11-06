@@ -12,16 +12,13 @@
 		<a href="{{ path('app_expert_operations') }}">Ajouter une opération</a>
 	</li>
 	<li class="listeLateral">
-		<a href="{{ path('app_liste_operations') }}">Lister mes opérations</a>
-	</li>
-	<li class="listeLateral">
-		<a href="{{ path('liste_employe') }}">Liste des employés</a>
+		<a href="{{ path('app_liste_operations') }}">Mes opérations</a>
 	</li>
 	<li class="listeLateral">
 		<a href="{{ path('inscription') }}">Ajouter un employé</a>
 	</li>
 	<li class="listeLateral">
-		<a href="{{ path('liste_employe_modifier') }}">Modifier un employé</a>
+		<a href="{{ path('liste_employe_modifier') }}">Liste des employés</a>
 	</li>
 	<li class="listeLateral">
 		<a href="{{ path('app_prise_commande_expert') }}">Ajouter commande client</a>
@@ -32,26 +29,27 @@
 
 {% endblock %}
 {% block main2 %}
-	<div class="row p-4 mx-auto">
+	<div class="cadreB">
+		<div class="row p-4 mx-auto">
 
-		{% for message in app.flashes('success') %}
-			<div class="alert alert-success">
-				{{message}}
-			</div>
-		{% endfor %}
-		<h3>Ajouter un client</h3>
-		{{ form_start(RegistrationClientType) }}
-		{{ form_row(RegistrationClientType.nom)}}
-		{{ form_row(RegistrationClientType.prenom)}}
-		{{ form_row(RegistrationClientType.nomSociete)}}
-		{{ form_row(RegistrationClientType.email)}}
-		{{ form_row(RegistrationClientType.adresse)}}
-		<div class="address-feedback position-absolute list-group" style="z-index:1100;"></div>
+			{% for message in app.flashes('success') %}
+				<div class="alert alert-success">
+					{{message}}
+				</div>
+			{% endfor %}
+			<h3>Ajouter un client</h3>
+			{{ form_start(RegistrationClientType) }}
+			{{ form_row(RegistrationClientType.nom)}}
+			{{ form_row(RegistrationClientType.prenom)}}
+			{{ form_row(RegistrationClientType.nomSociete)}}
+			{{ form_row(RegistrationClientType.email)}}
+			{{ form_row(RegistrationClientType.adresse)}}
+			<div class="address-feedback position-absolute list-group" style="z-index:1100;"></div>
 
 
-		<script>
+			<script>
 
-			var currentFocus = -1;
+				var currentFocus = -1;
 var fetchTrigger = 0;
 
 function setActive() {
@@ -126,7 +124,7 @@ autocomplete: 1
 let liste = "";
 $.each(data.features, function (i, obj) { // J'ajoute chaque élément dans une liste
 let cooladdress = obj.properties.name + " " + obj.properties.postcode + " <strong>" + obj.properties.city + "</strong>";
-liste += '<a class="list-group-item list-group-item-action py-1" style="width:58.5rem" href="#" name="' + obj.properties.label + '" data-name="' + obj.properties.name + ' ' + obj.properties.postcode + ' ' + obj.properties.city + '">' + cooladdress + '</a>';
+liste += '<a class="list-group-item list-group-item-action py-1" href="#" name="' + obj.properties.label + '" data-name="' + obj.properties.name + ' ' + obj.properties.postcode + ' ' + obj.properties.city + '">' + cooladdress + '</a>';
 });
 $('.address-feedback').html(liste);
 }, 'json');
@@ -144,10 +142,10 @@ if ($("div.address-feedback a").length > 0 && (e.keyCode === 38 || e.keyCode ===
 e.preventDefault();
 }
 });
-		</script>
-
-		<input type="submit" id="submit" value="Enregistrer" style="color:#3D6A9E;background-color:#CBC6C5" class="btn"/>
-		{{ form_end(RegistrationClientType) }}
+			</script>
+			<input type="submit" id="submit" value="Enregistrer" style="color:#3D6A9E;background-color:#CBC6C5" class="btn"/>
+			{{ form_end(RegistrationClientType) }}
+		</div>
 	</div>
 
 {% endblock %}

@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use DateTime;
+use DateInterval;
 use Dompdf\Dompdf;
+use DateTimeImmutable;
 use App\Entity\Commande;
 use App\Service\PdfService;
 use App\Service\MailerService;
@@ -13,8 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\KernelInterface;
-
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
@@ -43,7 +44,7 @@ class ExpertController extends AbstractController
         $commandeEnAttente = $repository->findBy(
             array('statut' => 'En attente'),
             array('date' => 'desc'),
-            null,
+            30,
             null
         );
         return $this->render('expert/operations.html.twig', [
@@ -97,8 +98,8 @@ class ExpertController extends AbstractController
         //recuperation de donnée en bdd de l'utilisatateur actuel trié par date 
         $commandeProfil = $repository->findBy(
             array('user' =>  $this->getUser()),
-            array('date' => 'desc'),
-            null,
+            array('id' => 'desc'),
+            10,
             null
         );
         return $this->render('expert/operationsListe.html.twig', [

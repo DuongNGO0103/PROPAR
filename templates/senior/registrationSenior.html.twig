@@ -1,32 +1,31 @@
 {% extends 'base.html.twig' %}
 
 
-{% block title %}Register
+{% block title %}Ajouter un client
 {% endblock %}
-{% block monTitre %}Inscription client
-{% endblock %}
+
 {% block navbarlists %}
-	<li class='listeLateral'>
+	<li class='listeLateral mt-4'>
 		<a href="{{ path('app_senior') }}">Tableau de bord</a>
 	</li>
-	<li class='listeLateral'>
+	<li class='listeLateral mt-4'>
 		<a href="{{ path('app_senior_operations') }}">Ajouter une opération</a>
 	</li>
-	<li class='listeLateral'>
-		<a href="{{ path('app_liste_operations_senior') }}">Lister mes opérations</a>
+	<li class='listeLateral mt-4'>
+		<a href="{{ path('app_liste_operations_senior') }}">Mes opérations</a>
 	</li>
-	<li class='listeLateral'>
+	<li class='listeLateral mt-4'>
 		<a href="{{ path('app_prise_commande') }}">Ajouter commande client</a>
 	</li>
 {% endblock %}
 
 {% block main2 %}
-	{% for message in app.flashes('success') %}
-		<div class="alert alert-success">
-			{{message}}
-		</div>
-	{% endfor %}
-	<div class="cadre">
+	<div class="cadreB">
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success">
+				{{message}}
+			</div>
+		{% endfor %}
 		<h3>Ajouter un client</h3>
 		{{ form_start(RegistrationClientType) }}
 		{{ form_row(RegistrationClientType.nom)}}
@@ -35,7 +34,7 @@
 		{{ form_row(RegistrationClientType.email)}}
 		{{ form_row(RegistrationClientType.adresse)}}
 		<div class="address-feedback position-absolute list-group" style="z-index:1100;"></div>
-		<input type="submit" class="btn" style="background-color:#CBC6C5; margin-bottom:5%; color:white" value="Enregistrer">
+		<input type="submit" class="btn" style="background-color:#CBC6C5;color:#3D6A9E; margin-bottom:5%;" value="Enregistrer">
 
 
 		<script>
@@ -114,7 +113,7 @@ autocomplete: 1
 let liste = "";
 $.each(data.features, function (i, obj) { // J'ajoute chaque élément dans une liste
 let cooladdress = obj.properties.name + " " + obj.properties.postcode + " <strong>" + obj.properties.city + "</strong>";
-liste += '<a class="list-group-item list-group-item-action py-1" style="width:61.5rem" href="#" name="' + obj.properties.label + '" data-name="' + obj.properties.name + ' ' + obj.properties.postcode + ' ' + obj.properties.city + '">' + cooladdress + '</a>';
+liste += '<a class="list-group-item list-group-item-action py-1" href="#" name="' + obj.properties.label + '" data-name="' + obj.properties.name + ' ' + obj.properties.postcode + ' ' + obj.properties.city + '">' + cooladdress + '</a>';
 });
 $('.address-feedback').html(liste);
 }, 'json');

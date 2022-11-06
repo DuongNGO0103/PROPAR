@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use DateTime;
+use DateInterval;
+use DateTimeImmutable;
 use App\Repository\CommandeRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -16,7 +19,10 @@ class CallAjaxController extends AbstractController
      */
     public function index(CommandeRepository $repository, NormalizerInterface $normalizer): JsonResponse
     {
-        $commandeProfil = $repository->searchBar($this->getUser());
+        $date = new DateTime('now');
+        $newDate = $date->sub(new DateInterval('P01Y'));
+
+        $commandeProfil = $repository->searchBar($this->getUser(), $newDate);
         $result = $normalizer->normalize($commandeProfil, 'json', ['groups' => 'show_product']);
         return $this->json(
             $result,

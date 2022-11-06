@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Dashboard
+{% block title %}Mes opérations
 {% endblock %}
 
 
@@ -12,7 +12,7 @@
 		<a href="{{ path('app_apprenti_operations') }}">Ajouter une opération</a>
 	</li>
 	<li class='btn-hover mt-4'>
-		<a href="{{ path('app_liste_operations_apprenti') }}">Liste mes opérations</a>
+		<a href="{{ path('app_liste_operations_apprenti') }}">Mes opérations</a>
 	</li>
 	<li class='btn-hover mt-4'>
 		<a href="{{ path('app_prise_commande_apprenti') }}">Ajouter commande client</a>
@@ -21,7 +21,7 @@
 
 {% block main2 %}
 	<div class="cadreB">
-		<h3>Lister mes opérations</h3>
+		<h3>Mes opérations</h3>
 		<input id='adresse' type="text" placeholder="Recherche par id ou client" class="searchBar form-control">
 		<div class="container text-center">
 			<div class="row">

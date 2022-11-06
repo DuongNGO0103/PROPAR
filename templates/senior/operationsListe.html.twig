@@ -5,23 +5,23 @@
 
 
 {% block navbarlists %}
-	<li class='listeLateral'>
+	<li class='listeLateral mt-4'>
 		<a href="{{ path('app_senior') }}">Tableau de bord</a>
 	</li>
-	<li class='listeLateral'>
+	<li class='listeLateral mt-4'>
 		<a href="{{ path('app_senior_operations') }}">Ajouter une opération</a>
 	</li>
-	<li class='listeLateral'>
-		<a href="{{ path('app_liste_operations_senior') }}">Lister mes opérations</a>
+	<li class='listeLateral mt-4'>
+		<a href="{{ path('app_liste_operations_senior') }}">Mes opérations</a>
 	</li>
-	<li class='listeLateral'>
+	<li class='listeLateral mt-4'>
 		<a href="{{ path('app_prise_commande') }}">Ajouter commande client</a>
 	</li>
 {% endblock %}
 
 {% block main2 %}
-	<div class="cadre">
-		<h3>Lister mes opérations</h3>
+	<div class="cadreB">
+		<h3>Mes opérations</h3>
 		<input id='adresse' type="text" placeholder="Recherche par id ou client" class="searchBar form-control">
 		<div class="container text-center">
 			<div class="row">
@@ -46,38 +46,42 @@
 				<div class="col"></div>
 				<hr>
 			</div>
-			<div class="scroll">
-				<p class="resultat row"></p>
-				{% for commandes in commandeProfil %}
-					<div class="cadreRow row">
-						<div class="test col">
-							{{commandes.id}}
-						</div>
-						<div class="test col">
-							{{commandes.nomCommande}}
-						</div>
-						<div class="test col">
-							{{ commandes.date|date("d/m/Y") }}
-						</div>
-						<div class="test col">
-							{{commandes.client.nom}}
-						</div>
-						<div class="test col">
-							{{commandes.operation.typeoperation}}
-						</div>
-						<div class="test col">
-							{{commandes.statut}}
-						</div>
-						<div class="test col">
-							{% if commandes.statut == "Terminer" %}
-								<a href="{{path('afficherCommande',{'id':commandes.id})}}" style="color:#3D6A9E" class="boutton">PDF</a>
-							{% endif %}
-						</div>
+
+			<div class="container text-center">
+				<div class="row">
+					<div class="scroll">
+						<p class="resultat row"></p>
+						{% for commandes in commandeProfil %}
+							<div class="cadreRow row">
+								<div class="test col">
+									{{commandes.id}}
+								</div>
+								<div class="test col">
+									{{commandes.nomCommande}}
+								</div>
+								<div class="test col">
+									{{ commandes.date|date("d/m/Y") }}
+								</div>
+								<div class="test col">
+									{{commandes.client.nom}}
+								</div>
+								<div class="test col">
+									{{commandes.operation.typeoperation}}
+								</div>
+								<div class="test col">
+									{{commandes.statut}}
+								</div>
+								<div class="test col">
+									{% if commandes.statut == "Terminer" %}
+										<a href="{{path('afficherCommande',{'id':commandes.id})}}" style="color:#3D6A9E" class="boutton">PDF</a>
+									{% endif %}
+								</div>
+							</div>
+						{% endfor %}
 					</div>
-				{% endfor %}
+				</div>
 			</div>
 			<script>
-
 				$(document).ready(function () {
 $("#adresse").keyup(function (e) {
 e.preventDefault();
