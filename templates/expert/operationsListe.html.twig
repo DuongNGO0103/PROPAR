@@ -11,13 +11,16 @@
 		<a href="{{ path('app_expert_operations') }}">Ajouter une opération</a>
 	</li>
 	<li class="listeLateral">
-		<a href="{{ path('app_liste_operations') }}">Mes opérations</a>
+		<a href="{{ path('app_liste_operations') }}">Lister mes opérations</a>
+	</li>
+	<li class="listeLateral">
+		<a href="{{ path('liste_employe') }}">Liste des employés</a>
 	</li>
 	<li class="listeLateral">
 		<a href="{{ path('inscription') }}">Ajouter un employé</a>
 	</li>
 	<li class="listeLateral">
-		<a href="{{ path('liste_employe_modifier') }}">Liste des employés</a>
+		<a href="{{ path('liste_employe_modifier') }}">Modifier un employé</a>
 	</li>
 	<li class="listeLateral">
 		<a href="{{ path('app_prise_commande_expert') }}">Ajouter commande client</a>
@@ -30,84 +33,86 @@
 {% endblock %}
 
 {% block main2 %}
-	<div class="cadreB">
-		<h3>Mes opérations</h3>
-		<input id='adresse' type="text" placeholder="Client ou id (en minuscule)" class="searchBar form-control">
 
-		<div class="container text-center">
-			<div class="row">
-				<div class="col">
-					<p class="titreCommande">ID</p>
-				</div>
-				<div class="col">
-					<p class="titreCommande">COMMANDE</p>
-				</div>
-				<div class="col">
-					<p class="titreCommande">DATE</p>
-				</div>
-				<div class="col">
-					<p class="titreCommande">CLIENT</p>
-				</div>
-				<div class="col">
-					<p class="titreCommande">OPERATION</p>
-				</div>
-				<div class="col">
-					<p class="titreCommande">STATUT</p>
-				</div>
-				<div class="col-2"></div>
-				<hr>
-			</div>
-			{# /////AFFICHAGE REPONSE///// #}
-			<div class="scroll">
-				<p class="resultat row"></p>
-				{% for commandes in commandeProfil %}
-					<div class="cadreRow row" style="margin-top:2%;">
-						<div class="test col">
-							{{commandes.id}}
-						</div>
-						<div class="test col">
-							{{commandes.nomCommande}}
-						</div>
-						<div class="test col">
-							{{ commandes.date|date("d/m/Y") }}
-						</div>
-						<div class="test col">
-							{{commandes.client.nom}}
-						</div>
-						<div class="test col">
-							{{commandes.operation.typeoperation}}
-						</div>
-						<div class="test col">
-							{{commandes.statut}}
-						</div>
-						<div class="test col-2">
-							{% if commandes.statut == "Terminer" %}
-								<a href="{{path('afficherCommande',{'id':commandes.id})}}" style="color:#3D6A9E" class="boutton">PDF</a>
-							{% endif %}
-						</div>
-					</div>
-				{% endfor %}
-			</div>
-			<script>
+	<h3>Lister mes opérations</h3>
+	<input id='adresse' type="text" placeholder="Recherche par id ou client" class="searchBar form-control">
 
-				$(document).ready(function () {
+	<div class="container text-center">
+		<div class="row">
+			<div class="col">
+				<p class="titreCommande">ID</p>
+			</div>
+			<div class="col">
+				<p class="titreCommande">COMMANDE</p>
+			</div>
+			<div class="col">
+				<p class="titreCommande">DATE</p>
+			</div>
+			<div class="col">
+				<p class="titreCommande">CLIENT</p>
+			</div>
+			<div class="col">
+				<p class="titreCommande">OPERATION</p>
+			</div>
+			<div class="col">
+				<p class="titreCommande">STATUT</p>
+			</div>
+			<div class="col"></div>
+			<hr>
+		</div>
+		{# /////AFFICHAGE REPONSE///// #}
+
+		<p class="resultat row"></p>
+		{% for commandes in commandeProfil %}
+			<div class=" row" style="margin-top:3%;">
+				<div class=" col">
+					{{commandes.id}}
+				</div>
+				<div class=" col">
+					{{commandes.nomCommande}}
+				</div>
+				<div class=" col">
+					{{ commandes.date|date("d/m/Y") }}
+				</div>
+				<div class=" col">
+					{{commandes.client.nom}}
+				</div>
+				<div class=" col">
+					{{commandes.operation.typeoperation}}
+				</div>
+				<div class=" col">
+					{{commandes.statut}}
+				</div>
+				<div class=" col">
+					{% if commandes.statut == "Terminer" %}
+						<a href="{{path('afficherCommande',{'id':commandes.id})}}" style="color:#3D6A9E" class="boutton">PDF</a>
+						{# <button type="submit" class="btn btn-primary">Modifier</button> #}
+					{% endif %}
+				</div>
+			</div>
+		{% endfor %}
+
+		<script>
+
+			$(document).ready(function () {
 $("#adresse").keyup(function (e) {
 e.preventDefault();
 e.stopPropagation();
 
 let input = $("#adresse").val();
 
+
 $.ajax({
 url: "https://localhost:8000/call/ajax/operationsListe",
 type: 'GET',
 
 success: function (response) {
-
+console.log(response);
 let liste = "";
 
-$.each(response, function (index, value) {
+$.each(response, function (index, value) { // J'ajoute chaque élément dans une liste
 if (input == value.client.nom.toLowerCase() || input == value.id) {
-liste += '<div class=" row" style="margin-top:3%;padding:5px">' + '<div class="id col">' + value.id + '</div>' + '<div class="com col">' + value.nomCommande + '</div>' + '<div class="date col">' + new Date(value.date).toLocaleDateString() + '</div>' + '<div class="client col">' + value.client.nom + '</div>' + '<div class="ope col">' + value.operation.type_operation + '</div>' + '<div class="statut col">' + value.statut + '</div>' + '<div class="pdf col">' + "<a href=https://localhost:8000/pdf/" + value.id + " style='color:#3D6A9E' class='boutton'>" + " PDF " + '</a>' + '</div>' + '</div>'
+liste += '<div class=" row" style="margin-top:3%; border:solid 1px #CBC6C5;padding:5px">' + '<div class="id col">' + value.id + '</div>' + '<div class="com col">' + value.nomCommande + '</div>' + '<div class="date col">' + new Date(value.date).toLocaleDateString() + '</div>' + '<div class="client col">' + value.client.nom + '</div>' + '<div class="ope col">' + value.operation.type_operation + '</div>' + '<div class="statut col">' + value.statut + '</div>' + '<div class="pdf col">' + "<a href=https://localhost:8000/pdf/" + value.id + " style='color:#3D6A9E' class='boutton'>" + " PDF " + '</a>' + '</div>' + '</div>'
 }
 });
 $('.resultat').html(liste);
@@ -119,7 +124,6 @@ console.log(error)
 });
 });
 });
-			</script>
-		</div>
+		</script>
 	</div>
 {% endblock %}
