@@ -62,7 +62,7 @@ class EmployeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($employe);
             $entityManager->flush();
-            $this->addFlash("success", "La modification a été efffectuée");
+            $this->addFlash("success", "La modification a été effectuée");
             return $this->redirectToRoute("liste_employe_modifier");
         }
         return $this->render('expert/employeModifierForm.html.twig', [

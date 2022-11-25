@@ -25,8 +25,7 @@ class RegistrationCommandeType extends AbstractType
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
                 'data' => new DateTime(),
-                'attr' => array('class' => 'form-control', 'style' => 'line-height: 20px;'),
-                'attr' => ['readonly' => true]
+                'attr' => array('class' => 'form-control', 'readonly' => true)
             ))
             ->add('operation', EntityType::class, [
                 'class' => Operation::class,
