@@ -2,9 +2,11 @@
 
 namespace App\Service;
 
+
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\Address;
-use Symfony\Component\Notifier\Transport\TransportInterface;
+use Symfony\Component\Mailer\Transport\TransportInterface;
+
 
 class MailerService
 {
@@ -30,7 +32,7 @@ class MailerService
             Propar vous remercie pour votre confiance !</p>")
             //renseignez votre chemin ou ce situe le fichier facture.pdf dans le dossier public/pdf/...
             //   ->attachFromPath('Votre chemin ici !!');
-            ->attachFromPath('C:\Users\DeLL\Desktop\proparmohir\PROPAR\public\pdf\facture.pdf');
+            ->attachFromPath('C:\Users\le_de\Desktop\PROPAR\Projet_PROPAR\PROPAR\public\pdf\facture.pdf');
         $this->mailer->send($email);
     }
 }
